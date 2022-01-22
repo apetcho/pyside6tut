@@ -23,4 +23,45 @@ class SortedDict(dict):
     iterkeys = __iter__
 
 
+class AddressBook(QtWidgets.QWidget):
+    NavigationMode, AddingMode, EditingMode = range(3)
 
+    def __init__(self, parent=None):
+        super(AddressBook, self).__init__(parent)
+        pass
+
+    def addContact(self):
+        pass
+
+    def editContact(self):
+        pass
+
+    def submitContact(self):
+        pass
+
+    def cancel(self):
+        pass
+
+    def removeContact(self):
+        pass
+
+    def next(self):
+        pass
+
+    def previous(self):
+        pass
+
+    def findContact(self):
+        pass
+
+    def updateInterface(self, mode):
+        pass
+
+    def saveToFile(self):
+        pass
+
+    def loadFromFile(self):
+        pass
+
+    def exportAsVCard(self):
+        pass
