@@ -417,7 +417,7 @@ class FindDialog(QtWidgets.QDialog):
         self.hide()
 
     def getFindText(self):
-        pass
+        return self.findText
 
 
 if __name__ == "__main__":
