@@ -1,0 +1,10 @@
+*.pyc
+*~
+dist
+*.egg*
+.eggs
+*.swp
+.DS_Store
+.pytest*
+.vscode/
+*/__pycache__
