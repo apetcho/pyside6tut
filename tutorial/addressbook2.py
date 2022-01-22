@@ -36,7 +36,7 @@ class AddressBook(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(AddressBook, self).__init__(parent)
         self.contacts = SortedDict()
-        self.oldname = ""
+        self.oldName = ""
         self.oldAddress = ""
 
         nameLabel = QtWidgets.QLabel("Name:")
@@ -66,8 +66,23 @@ class AddressBook(QtWidgets.QWidget):
         mainLayout.addWidget(self.addressText, 1, 1)
         mainLayout.addWidget(buttonLayout1, 1, 2)
 
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Simple Address Book")
+
     def addContact(self):
-        pass
+        self.oldName = self.nameLine.text()
+        self.oldAddress = self.addressText.toPlainText()
+
+        self.nameLine.clear()
+        self.addressText.clear()
+
+        self.nameLine.setReadOnly(False)
+        self.nameLine.setFocus(QtCore.Qt.OtherFocusReason)
+        self.addressText.setReadOnly(False)
+
+        self.addButton.setEnabled(False)
+        self.submitButton.show()
+        self.cancelButton.show()
 
     def submitContact(self):
         pass
