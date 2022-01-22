@@ -285,7 +285,20 @@ class AddressBook(QtWidgets.QWidget):
             self.saveButton.setEnabled(number >= 1)
 
     def saveToFile(self):
-        pass
+        fname, _ = QtWidgets.QFileDialog.getSaveFileName(self,
+            "Save Address Book", "", "Address Book (*.abk);;All Files (*)")
+        if not fname:
+            return
+
+        try:
+            outfile = open(str(fname), "wb")
+        except IOError:
+            QtWidgets.QMessageBox.information(self, "Unable to open file",
+                f"There was an error opening {fname!r}")
+            return
+
+        pickle.dump(self.contacts, outfile)
+        outfile.close()
 
     def loadFromFile(self):
         pass
