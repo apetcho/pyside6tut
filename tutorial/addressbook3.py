@@ -79,6 +79,7 @@ class AddressBook(QtWidgets.QWidget):
         mainLayout.addWidget(addressLabel, 1, 0, QtCore.Qt.AlignTop)
         mainLayout.addWidget(self.addressText, 1, 1)
         mainLayout.addLayout(buttonLayout1, 1, 2)
+        mainLayout.addLayout(buttonLayout2, 3, 1)
 
         self.setLayout(mainLayout)
         self.setWindowTitle("Simple Address Book")
