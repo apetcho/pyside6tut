@@ -96,6 +96,8 @@ class AddressBook(QtWidgets.QWidget):
         self.addressText.setReadOnly(False)
 
         self.addButton.setEnabled(False)
+        self.nextButton.setEnabled(False)
+        self.previousButton.setEnabled(False)
         self.submitButton.show()
         self.cancelButton.show()
 
