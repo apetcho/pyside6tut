@@ -131,7 +131,10 @@ class AddressBook(QtWidgets.QWidget):
         self.updateInterface(self.AddingMode)
 
     def editContact(self):
-        pass
+        self.oldName = self.nameLine.text()
+        self.oldAddress = self.addressText.toPlainText()
+
+        self.updateInterface(self.EditingMode)
 
     def submitContact(self):
         pass
