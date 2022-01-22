@@ -8,7 +8,18 @@ from PySide6 import QtWidgets
 class LCDRange(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(LCDRange, self).__init__(parent)
-        # TODO
+
+        lcd = QtWidgets.QLCDNumber(2)
+        slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        slider.setRange(0, 99)
+        slider.setValue(0)
+        self.connect(slider, QtCore.SIGNAL("valueChanged(int)"),
+            lcd, QtCore.SLOT("display(int)"))
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(lcd)
+        layout.addWidget(slider)
+        self.setLayout(layout)
 
 
 class MyWidget(QtWidgets.QWidget):
