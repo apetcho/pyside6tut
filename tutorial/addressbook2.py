@@ -53,6 +53,12 @@ class AddressBook(QtWidgets.QWidget):
         self.cancelButton = QtWidgets.QPushButton("&Cancel")
         self.cancelButton.hide()
 
+        buttonLayout1 = QtWidgets.QVBoxLayout()
+        buttonLayout1.addWidget(self.addButton, QtCore.Qt.AlignTop)
+        buttonLayout1.addWidget(self.submitButton)
+        buttonLayout1.addWidget(self.cancelButton)
+        buttonLayout1.addStretch()
+
     def addContact(self):
         pass
 
