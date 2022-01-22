@@ -301,7 +301,30 @@ class AddressBook(QtWidgets.QWidget):
         outfile.close()
 
     def loadFromFile(self):
-        pass
+        fname, _ = QtWidgets.QFileDialog.getOpenFileName(self,
+            "Open Address Book", "", "Address Book (*.abk);;All File (*)")
+        if not fname:
+            return
+
+        try:
+            infile = open(str(fname), "rb")
+        except IOError:
+            QtWidgets.QMessageBox.information(self, "Unable to open file",
+                f"There was an error opening {fname!r}")
+            return
+
+        self.contacts = pickle.load(infile)
+        infile.close()
+
+        if len(self.contacts) == 0:
+            QtWidgets.QMessageBox.information(self, "No contacts in file",
+                "The file you are attempting to open contains no contacts.")
+        else:
+            for name, address in self.contacts:
+                self.nameLine.setText(name)
+                self.addressText.setText(address)
+
+        self.updateInterface(self.NavigationMode)
 
 
 class FindDialog(QtWidgets.QDialog):
