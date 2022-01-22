@@ -12,7 +12,7 @@ class SortedDict(dict):
             self._idx = 0
 
         def __iter__(self):
-            pass
+            return self
 
         def next(self):
             pass
