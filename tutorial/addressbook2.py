@@ -85,7 +85,36 @@ class AddressBook(QtWidgets.QWidget):
         self.cancelButton.show()
 
     def submitContact(self):
-        pass
+        name = self.nameLine.text()
+        address = self.addressText.toPlainText()
+
+        if name == "" or address == "":
+            QtWidgets.QMessageBox.information(
+                self, "Empty Field", "Please enter a name and address.")
+            return
+
+        if name not in self.contacts:
+            self.contacts[name] = address
+            QtWidgets.QMessageBox.information(
+                self, "Add Successful",
+                f'"{name}" has been added to your address book.'
+            )
+        else:
+            QtWidgets.QMessageBox.information(
+                self, "Add Unsuccessful",
+                f'Sorry, "{name}" is already in your address book.' 
+            )
+            return
+
+        if not self.contacts:
+            self.nameLine.clear()
+            self.addressText.clear()
+
+        self.nameLine.setReadOnly(True)
+        self.addressText.setReadOnly(True)
+        self.addButton.setEnabled(True)
+        self.submitButton.hide()
+        self.cancelButton.hide()
 
     def cancel(self):
         pass
