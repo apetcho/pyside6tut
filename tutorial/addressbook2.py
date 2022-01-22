@@ -59,6 +59,13 @@ class AddressBook(QtWidgets.QWidget):
         buttonLayout1.addWidget(self.cancelButton)
         buttonLayout1.addStretch()
 
+        mainLayout = QtWidgets.QGridLayout()
+        mainLayout.addWidget(nameLabel, 0, 0)
+        mainLayout.addWidget(self.nameLine, 0, 1)
+        mainLayout.addWidget(addressLabel, 1, 0, QtCore.Qt.AlignTop)
+        mainLayout.addWidget(self.addressText, 1, 1)
+        mainLayout.addWidget(buttonLayout1, 1, 2)
+
     def addContact(self):
         pass
 
