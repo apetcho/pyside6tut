@@ -53,6 +53,10 @@ class AddressBook(QtWidgets.QWidget):
         self.cancelButton = QtWidgets.QPushButton("&Cancel")
         self.cancelButton.hide()
 
+        self.addButton.clicked.connect(self.addContact)
+        self.submitButton.clicked.connect(self.submitContact)
+        self.cancelButton.clicked.connect(self.cancel)
+
         buttonLayout1 = QtWidgets.QVBoxLayout()
         buttonLayout1.addWidget(self.addButton, QtCore.Qt.AlignTop)
         buttonLayout1.addWidget(self.submitButton)
@@ -64,7 +68,7 @@ class AddressBook(QtWidgets.QWidget):
         mainLayout.addWidget(self.nameLine, 0, 1)
         mainLayout.addWidget(addressLabel, 1, 0, QtCore.Qt.AlignTop)
         mainLayout.addWidget(self.addressText, 1, 1)
-        mainLayout.addWidget(buttonLayout1, 1, 2)
+        mainLayout.addLayout(buttonLayout1, 1, 2)
 
         self.setLayout(mainLayout)
         self.setWindowTitle("Simple Address Book")
