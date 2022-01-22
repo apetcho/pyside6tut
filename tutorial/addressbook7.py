@@ -388,9 +388,26 @@ class FindDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None):
         super(FindDialog, self).__init__(parent)
-        pass
+
+        findLabel = QtWidgets.QLabel("Enter the name of a contact:")
+        self.lineEdit = QtWidgets.QLineEdit()
+
+        self.findButton = QtWidgets.QPushButton("&Find")
+        self.findText = ""
+
+        layout = QtWidgets.QHBoxLayout()
+        layout.addWidget(findLabel)
+        layout.addWidget(self.lineEdit)
+        layout.addWidget(self.findButton)
+
+        self.setLayout(layout)
+        self.windowTitle("Find a Contact")
+
+        self.findButton.clicked.connect(self.findClicked)
+        self.findButton.clicked.connect(self.accept)
 
     def findClicked(self):
+        text = self.lineEdit.text()
         pass
 
     def getFindText(self):
