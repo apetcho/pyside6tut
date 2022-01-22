@@ -22,3 +22,25 @@ class SortedDict(dict):
     iterkeys = __iter__
 
 
+class AddressBook(QtWidgets.QWidget):
+
+    def __init__(self, parent=None):
+        super(AddressBook, self).__init__(parent)
+        pass
+
+    def addContact(self):
+        pass
+
+    def submitContact(self):
+        pass
+
+    def cancel(self):
+        pass
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    addressBook = AddressBook()
+    addressBook.show()
+    sys.exit(app.exec())
