@@ -132,36 +132,42 @@ class AddressBook(QtWidgets.QWidget):
                 self, "Empty Field", "Please enter a name and address.")
             return
 
-        if name not in self.contacts:
-            self.contacts[name] = address
-            QtWidgets.QMessageBox.information(
-                self, "Add Successful",
-                f'"{name}" has been added to your address book.'
-            )
-        # TODO
-        else:
-            QtWidgets.QMessageBox.information(
-                self, "Add Unsuccessful",
-                f'Sorry, "{name}" is already in your address book.' 
-            )
-            return
+        if self.currentMode == self.AddingMode:
+            if name not in self.contacts:
+                self.contacts[name] = address
+                QtWidgets.QMessageBox.information(
+                    self, "Add Successful",
+                    f'"{name}" has been added to your address book.'
+                )
+            else:
+                QtWidgets.QMessageBox.information(
+                    self, "Add Unsuccessful",
+                    f'Sorry, "{name}" is already in your address book.' 
+                )
+                return
 
-        if not self.contacts:
-            self.nameLine.clear()
-            self.addressText.clear()
-
-        self.nameLine.setReadOnly(True)
-        self.addressText.setReadOnly(True)
-        self.addButton.setEnabled(True)
-
-        number = len(self.contacts)
-        self.nextButton.setEnabled(number > 1)
-        self.previousButton.setEnabled(number > 1)
-
-        self.submitButton.hide()
-        self.cancelButton.hide()
-
-        # TODO
+        elif self.currentMode == self.EditingMode:
+            if self.oldName != name:
+                if name not in self.contacts:
+                    QtWidgets.QMessageBox.information(
+                        self, "Edit Successful",
+                        (f"{self.oldName!r} hash been edited in your address"
+                         " book.")
+                    )
+                    del self.contacts[self.oldName]
+                    self.contacts[name] = address
+                else:
+                    QtWidgets.QMessageBox.information(
+                        self, "Edit Unsuccessful",
+                        f"Sorry, {name!r} is already in your address book."
+                    )
+            elif self.oldAddress != address:
+                QtWidgets.QMessageBox.information(
+                    self, "Edit Successful",
+                    f"{name!r} has been edited in your address book."
+                )
+                self.contacts[name] = address
+        self.updateInterface(self.NavigationMode)
 
     def cancel(self):
         self.nameLine.setText(self.oldName)
