@@ -26,7 +26,7 @@ class SortedDict(dict):
         __next__ = next
 
     def __iter__(self):
-        pass
+        return SortedDict.Iterator(self)
 
     iterkeys = __iter__
 
@@ -35,7 +35,23 @@ class AddressBook(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(AddressBook, self).__init__(parent)
-        pass
+        self.contacts = SortedDict()
+        self.oldname = ""
+        self.oldAddress = ""
+
+        nameLabel = QtWidgets.QLabel("Name:")
+        self.nameLine = QtWidgets.QLineEdit()
+        self.nameLine.setReadOnly(True)
+
+        addressLabel = QtWidgets.QLabel("Address:")
+        self.addressText = QtWidgets.QTextEdit()
+        self.addressText.setReadOnly(True)
+
+        self.addButton = QtWidgets.QPushButton("&Add")
+        self.submitButton = QtWidgets.QPushButton("&Submit")
+        self.submitButton.hide()
+        self.cancelButton = QtWidgets.QPushButton("&Cancel")
+        self.cancelButton.hide()
 
     def addContact(self):
         pass
