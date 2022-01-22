@@ -122,7 +122,13 @@ class AddressBook(QtWidgets.QWidget):
         self.setWindowTitle("Simple Address Book")
 
     def addContact(self):
-        pass
+        self.oldName = self.nameLine.text()
+        self.oldAddress = self.addressText.toPlainText()
+
+        self.nameLine.clear()
+        self.addressText.clear()
+
+        self.updateInterface(self.AddingMode)
 
     def editContact(self):
         pass
