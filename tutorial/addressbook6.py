@@ -281,6 +281,9 @@ class AddressBook(QtWidgets.QWidget):
             self.submitButton.hide()
             self.cancelButton.hide()
 
+            self.loadButton.setEnabled(True)
+            self.saveButton.setEnabled(number >= 1)
+
     def saveToFile(self):
         pass
 
