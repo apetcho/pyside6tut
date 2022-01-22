@@ -137,7 +137,42 @@ class AddressBook(QtWidgets.QWidget):
         self.updateInterface(self.EditingMode)
 
     def submitContact(self):
-        pass
+        name = self.nameLine.text()
+        address = self.addressText.toPlainText()
+
+        if name == "" or address == "":
+            QtWidgets.QMessageBox.information(self, "Empty Field",
+                "Please enter a name and address.")
+            return
+
+        if self.currentMode == self.AddingMode:
+            if name not in self.contacts:
+                self.contacts[name] = address
+                QtWidgets.QMessageBox.information(self, "Add Successful",
+                    f"{name!r} has been added to your address book.")
+            else:
+                QtWidgets.QMessageBox.information(self, "Add Unsuccessful",
+                    f"Sorry, {name!r} is already in your address book.")
+                return
+
+        elif self.currentMode == self.EditingMode:
+            if self.oldName != name:
+                if name not in self.contacts:
+                    QtWidgets.QMessageBox.information(self, "Edit Successful",
+                        f"{self.oldName!r} has been edited in your address "
+                        "book.")
+                    del self.contacts[self.oldName]
+                    self.contacts[name] = address
+                else:
+                    QtWidgets.QMessageBox.information(self, "Edit Unsuccessful",
+                        f"Sorry, {name!r} is already in your address book.")
+                    return
+            elif self.oldAddress != address:
+                QtWidgets.QMessageBox.information(self, "Edit Successful",
+                    f"{name!r} has been edited in your address book.")
+                self.contacts[name] = address
+
+        self.updateInterface(self.NavigationMode)
 
     def cancel(self):
         pass
