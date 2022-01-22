@@ -130,6 +130,11 @@ class AddressBook(QtWidgets.QWidget):
         self.nameLine.setReadOnly(True)
         self.addressText.setReadOnly(True)
         self.addButton.setEnabled(True)
+
+        number = len(self.contacts)
+        self.nextButton.setEnabled(number > 1)
+        self.previousButton.setEnabled(number > 1)
+        
         self.submitButton.hide()
         self.cancelButton.hide()
 
