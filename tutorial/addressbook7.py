@@ -197,7 +197,20 @@ class AddressBook(QtWidgets.QWidget):
         self.updateInterface(self.NavigationMode)
 
     def next(self):
-        pass
+        name = self.nameLine.text()
+        it = iter(self.contacts)
+
+        try:
+            while True:
+                _name, _ = it.next()
+                if _name == name:
+                    _name, _addr = it.next()
+                    break
+        except StopIteration:
+            _name, _addr = iter(self.contacts).next()
+
+        self.nameLine.setText(_name)
+        self.addressText.setText(_addr)
 
     def previous(self):
         pass
