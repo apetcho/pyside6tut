@@ -15,7 +15,13 @@ class SortedDict(dict):
             return self
 
         def next(self):
-            pass
+            if self._idx >= self._nr_items:
+                raise StopIteration
+
+            key = self._keys[self._idx]
+            val = self._dict[key]
+            self._idx += 1
+            return (key, val)
 
         __next__ = next
 
