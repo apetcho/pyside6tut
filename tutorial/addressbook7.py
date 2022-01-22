@@ -175,7 +175,9 @@ class AddressBook(QtWidgets.QWidget):
         self.updateInterface(self.NavigationMode)
 
     def cancel(self):
-        pass
+        self.nameLine.setText(self.oldName)
+        self.addressText.setText(self.oldAddress)
+        self.updateInterface(self.NavigationMode)
 
     def removeContact(self):
         pass
