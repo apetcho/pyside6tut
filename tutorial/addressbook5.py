@@ -5,8 +5,11 @@ from PySide6 import QtWidgets
 
 class SortedDict(dict):
     class Iterator:
-        def __ini__(self, sorted_dict):
-            pass
+        def __ini__(self, sorted_dict: dict):
+            self._dict = sorted_dict
+            self._keys = sorted(self._dict.keys())
+            self._nr_items = len(self._keys)
+            self._idx = 0
 
         def __iter__(self):
             return self
