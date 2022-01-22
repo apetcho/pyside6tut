@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import numbers
 from PySide6 import QtCore
 from PySide6 import QtWidgets
 
@@ -134,18 +135,26 @@ class AddressBook(QtWidgets.QWidget):
         number = len(self.contacts)
         self.nextButton.setEnabled(number > 1)
         self.previousButton.setEnabled(number > 1)
-        
+
         self.submitButton.hide()
         self.cancelButton.hide()
 
     def cancel(self):
         self.nameLine.setText(self.oldName)
-        self.nameLine.setReadOnly(True)
-
         self.addressText.setText(self.oldAddress)
-        self.addressText.setReadOnly(True)
 
+        if not self.contacts:
+            self.nameLine.clear()
+            self.addressText.clear()
+
+        self.nameLine.setReadOnly(True)
+        self.addressText.setReadOnly(True)
         self.addButton.setEnabled(True)
+
+        number = len(self.contacts)
+        self.nextButton.setEnabled(number > 1)
+        self.previousButton.setEnabled(number > 1)
+        
         self.submitButton.hide()
         self.cancelButton.hide()
 
