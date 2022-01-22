@@ -65,3 +65,16 @@ class AddressBook(QtWidgets.QWidget):
 
     def exportAsVCard(self):
         pass
+
+
+class FindDialog(QtWidgets.QDialog):
+
+    def __init__(self, parent=None):
+        super(FindDialog, self).__init__(parent)
+        pass
+
+    def findClicked(self):
+        pass
+
+    def getFindText(self):
+        pass
