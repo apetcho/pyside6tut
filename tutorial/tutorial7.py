@@ -32,8 +32,9 @@ class LCDRange(QtWidgets.QWidget):
     def value(self):
         return self.slider.value()
 
-    def value(self):
-        pass
+    @QtCore.Slot(int)
+    def setValue(self, value):
+        self.slider.setValue(value)
 
     @QtCore.Slot(int)
     def setValue(self, value):
