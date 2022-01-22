@@ -340,7 +340,48 @@ class AddressBook(QtWidgets.QWidget):
         self.updateInterface(self.NavigationMode)
 
     def exportAsVCard(self):
-        pass
+        name = str(self.nameLine.text())
+        address = self.addressText.toPlainText()
+
+        nameList = name.split()
+
+        if len(nameList) > 1:
+            firstName = nameList[0]
+            lastName = nameList[1]
+        else:
+            firstName = name
+            lastName = ""
+
+        fileName = QtWidgets.QFileDialog.getSaveFileName(
+            self, "Export Contact", "",
+            "vCard Files (*.vcf);;All Files (*)")[0]
+
+        if not fileName:
+            return
+
+        outfile = QtCore.QFile(fileName)
+        if not outfile.open(QtCore.QIODevice.WriteOnly):
+            QtWidgets.QMessageBox.information(
+                self, "Unable to open file", outfile.errorString())
+            return
+        
+        outstr = QtCore.QTextStream(outfile)
+
+        outstr << "BEGIN::VCARD" << "\n"
+        outstr << "VERSION:2.1"  << "\n"
+        outstr << "N:" << lastName << ";" << firstName << "\n"
+        outstr << "FN:" << " ".join(nameList) << "\n"
+
+        address.replace(";", "\\;")
+        address.replace("\n", ";")
+        address.replace(",", " ")
+
+        outstr << "ADR;HOME:;" << address << "\n"
+        outstr << "END:VCARD" << "\n"
+
+        QtWidgets.QMessageBox.information(
+            self, "Export Successful",
+            f"{name!r} has been exported as a vCard.")
 
 
 class FindDialog(QtWidgets.QDialog):
