@@ -60,12 +60,18 @@ class AddressBook(QtWidgets.QWidget):
         self.addButton.clicked.connect(self.addContact)
         self.submitButton.clicked.connect(self.submitContact)
         self.cancelButton.clicked.connect(self.cancel)
+        self.nextButton.clicked.connect(self.next)
+        self.previousButton.clicked.connect(self.previous)
 
         buttonLayout1 = QtWidgets.QVBoxLayout()
         buttonLayout1.addWidget(self.addButton, QtCore.Qt.AlignTop)
         buttonLayout1.addWidget(self.submitButton)
         buttonLayout1.addWidget(self.cancelButton)
         buttonLayout1.addStretch()
+
+        buttonLayout2 = QtWidgets.QHBoxLayout()
+        buttonLayout2.addWidget(self.previousButton)
+        buttonLayout2.addWidget(self.nextButton)
 
         mainLayout = QtWidgets.QGridLayout()
         mainLayout.addWidget(nameLabel, 0, 0)
@@ -134,6 +140,12 @@ class AddressBook(QtWidgets.QWidget):
         self.addButton.setEnabled(True)
         self.submitButton.hide()
         self.cancelButton.hide()
+
+    def next(self):
+        pass
+
+    def previous(self):
+        pass
 
 
 if __name__ == "__main__":
