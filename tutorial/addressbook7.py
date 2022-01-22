@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import pickle
-from sre_parse import _OpGroupRefExistsType
-from tkinter import mainloop
 from PySide6 import QtCore
 from PySide6 import QtWidgets
 
@@ -401,7 +399,7 @@ class FindDialog(QtWidgets.QDialog):
         layout.addWidget(self.findButton)
 
         self.setLayout(layout)
-        self.windowTitle("Find a Contact")
+        self.setWindowTitle("Find a Contact")
 
         self.findButton.clicked.connect(self.findClicked)
         self.findButton.clicked.connect(self.accept)
