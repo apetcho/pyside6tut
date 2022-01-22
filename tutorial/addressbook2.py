@@ -117,7 +117,15 @@ class AddressBook(QtWidgets.QWidget):
         self.cancelButton.hide()
 
     def cancel(self):
-        pass
+        self.nameLine.setText(self.oldName)
+        self.nameLine.setReadOnly(True)
+
+        self.addressText.setText(self.oldAddress)
+        self.addressText.setReadOnly(True)
+
+        self.addButton.setEnabled(True)
+        self.submitButton.hide()
+        self.cancelButton.hide()
 
 
 if __name__ == "__main__":
