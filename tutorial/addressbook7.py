@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import pickle
+from tkinter import mainloop
 from PySide6 import QtCore
 from PySide6 import QtWidgets
 
@@ -38,7 +39,87 @@ class AddressBook(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(AddressBook, self).__init__(parent)
-        pass
+
+        self.contacts = SortedDict()
+        self.oldName = ""
+        self.oldAddress = ""
+        self.currentMode = self.NavigationMode
+
+        nameLabel = QtWidgets.QLabel("Name:")
+        self.nameLine = QtWidgets.QLineEdit()
+        self.nameLine.setReadOnly(True)
+
+        addressLabel = QtWidgets.QLabel("Address:")
+        self.addressText = QtWidgets.QTextEdit()
+        self.addressText.setReadOnly(True)
+
+        self.addButton = QtWidgets.QPushButton("&Add")
+        self.editButton = QtWidgets.QPushButton("&Edit")
+        self.editButton.setEnabled(False)
+        self.removeButton = QtWidgets.QPushButton("&Remove")
+        self.removeButton.setEnabled(False)
+        self.findButton = QtWidgets.QPushButton("&Find")
+        self.findButton.setEnabled(False)
+        self.submitButton = QtWidgets.QPushButton("&Submit")
+        self.submitButton.hide()
+        self.cancelButton = QtWidgets.QPushButton("&Cancel")
+        self.cancelButton.hide()
+
+        self.nextButton = QtWidgets.QPushButton("&Next")
+        self.nextButton.setEnabled(False)
+        self.previousButton = QtWidgets.QPushButton("&Previous")
+        self.previousButton.setEnabled(False)
+
+        self.loadButton = QtWidgets.QPushButton("&Load...")
+        self.loadButton.setToolTip("Load contacts from a file")
+        self.saveButton = QtWidgets.QPushButton("Sa&ve...")
+        self.saveButton.setToolTip("Save contacts to a file")
+        self.saveButton.setEnabled(False)
+
+        self.exportButton = QtWidgets.QPushButton("Ex&port")
+        self.exportButton.setToolTip("Export as vCard")
+        self.exportButton.setEnabled(False)
+
+        self.dialog = FindDialog()
+
+        self.addButton.clicked.connect(self.addContact)
+        self.submitButton.clicked.connect(self.submitContact)
+        self.editButton.clicked.connect(self.editContact)
+        self.removeButton.clicked.connect(self.removeContact)
+        self.findButton.clicked.connect(self.findContact)
+        self.cancelButton.clicked.connect(self.cancel)
+        self.nextButton.clicked.connect(self.next)
+        self.previousButton.clicked.connect(self.previous)
+        self.loadButton.clicked.connect(self.loadFromFile)
+        self.saveButton.clicked.connect(self.saveToFile)
+        self.exportButton.clicked.connect(self.exportAsVCard)
+
+        buttonLayout1 = QtWidgets.QVBoxLayout()
+        buttonLayout1.addWidget(self.addButton)
+        buttonLayout1.addWidget(self.editButton)
+        buttonLayout1.addWidget(self.removeButton)
+        buttonLayout1.addWidget(self.findButton)
+        buttonLayout1.addWidget(self.submitButton)
+        buttonLayout1.addWidget(self.cancelButton)
+        buttonLayout1.addWidget(self.loadButton)
+        buttonLayout1.addWidget(self.saveButton)
+        buttonLayout1.addWidget(self.exportButton)
+        buttonLayout1.addStretch()
+
+        buttonLayout2 = QtWidgets.QHBoxLayout()
+        buttonLayout2.addWidget(self.previousButton)
+        buttonLayout2.addWidget(self.nextButton)
+
+        mainLayout = QtWidgets.QGridLayout()
+        mainLayout.addWidget(nameLabel, 0, 0)
+        mainLayout.addWidget(self.nameLine, 0, 1)
+        mainLayout.addWidget(addressLabel, 1, 0, QtCore.Qt.AlignTop)
+        mainLayout.addWidget(self.addressText, 1, 1)
+        mainLayout.addLayout(buttonLayout1, 1, 2)
+        mainLayout.addLayout(buttonLayout2, 2, 1)
+
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Simple Address Book")
 
     def addContact(self):
         pass
