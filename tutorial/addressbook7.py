@@ -408,7 +408,13 @@ class FindDialog(QtWidgets.QDialog):
 
     def findClicked(self):
         text = self.lineEdit.text()
-        pass
+        if not text:
+            QtWidgets.QMessageBox.information(
+                self, "Empty Field", "Please enter a name.")
+            return
+        self.findText = text
+        self.lineEdit.clear()
+        self.hide()
 
     def getFindText(self):
         pass
