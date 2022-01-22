@@ -175,7 +175,25 @@ class AddressBook(QtWidgets.QWidget):
         self.addressText.setText(next_address)
 
     def previous(self):
-        pass
+        name = self.nameLine.text()
+        prevname = prevaddr = None
+        for this_name, this_address in self.contacts:
+            if this_name == name:
+                break
+
+            prevname = this_name
+            prevaddr = this_address
+        else:
+            self.nameLine.clear()
+            self.addressText.clear()
+            return
+
+        if prevname is None:
+            for prevname, prevaddr in self.contacts:
+                pass
+
+        self.nameLine.setText(prevname)
+        self.addressText.setText(prevaddr)
 
 
 if __name__ == "__main__":
