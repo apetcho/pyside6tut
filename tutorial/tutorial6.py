@@ -4,6 +4,8 @@ from PySide6 import QtCore
 from PySide6 import QtGui
 from PySide6 import QtWidgets
 
+app = QtWidgets.QApplication(sys.argv)
+
 
 class LCDRange(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -30,7 +32,7 @@ class MyWidget(QtWidgets.QWidget):
         quit = QtWidgets.QPushButton("Quit")
         quit.setFont(QtGui.QFont("Arial", 18, QtGui.QFont.Bold))
         self.connect(quit, QtCore.SIGNAL("clicked()"),
-            qApp, QtCore.SLOT("quit()"))
+            app, QtCore.SLOT("quit()"))
 
         grid = QtWidgets.QGridLayout()
         layout = QtWidgets.QVBoxLayout()
@@ -42,7 +44,7 @@ class MyWidget(QtWidgets.QWidget):
                 grid.addWidget(LCDRange(), row, column)
 
 
-app = QtWidgets.QApplication(sys.argv)
+
 widget = MyWidget()
 widget.show()
 sys.exit(app.exec())
