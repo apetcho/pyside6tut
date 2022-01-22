@@ -248,7 +248,50 @@ class AddressBook(QtWidgets.QWidget):
         self.updateInterface(self.NavigationMode)
 
     def updateInterface(self, mode):
-        pass
+        self.currentMode = mode
+
+        if self.currentMode in (self.AddingMode, self.EditingMode):
+            self.nameLine.setReadOnly(False)
+            self.nameLine.setFocus(QtCore.Qt.OtherFocusReason)
+            self.addressText.setReadOnly(False)
+
+            self.addButton.setEnabled(False)
+            self.editButton.setEnabled(False)
+            self.removeButton.setEnabled(False)
+
+            self.nextButton.setEnabled(False)
+            self.previousButton.setEnabled(False)
+
+            self.submitButton.show()
+            self.cancelButton.show()
+
+            self.loadButton.setEnabled(False)
+            self.saveButton.setEnabled(False)
+            self.exportButton.setEnabled(False)
+
+        elif self.currentMode == self.NavigationMode:
+            if not self.contacts:
+                self.nameLine.clear()
+                self.addressText.clear()
+
+            self.nameLine.setReadOnly(True)
+            self.addressText.setReadOnly(True)
+            self.addButton.setEnabled(True)
+
+            number = len(self.contacts)
+            self.editButton.setEnabled(number >= 1)
+            self.removeButton.setEnabled(number >= 1)
+            self.findButton.setEnabled(number > 2)
+            self.nextButton.setEnabled(number > 1)
+            self.previousButton.setEnabled(number > 1)
+
+            self.submitButton.hide()
+            self.cancelButton.hide()
+
+            self.exportButton.setEnabled(number >= 1)
+
+            self.loadButton.setEnabled(True)
+            self.saveButton.setEnabled(number >= 1)
 
     def saveToFile(self):
         pass
