@@ -103,8 +103,10 @@ class AddressBook(QtWidgets.QWidget):
 
         self.nameLine.clear()
         self.addressText.clear()
-        # TODO
 
+        self.updateInterface(self.AddingMode)
+
+        # FIXME
         self.nameLine.setReadOnly(False)
         self.nameLine.setFocus(QtCore.Qt.OtherFocusReason)
         self.addressText.setReadOnly(False)
@@ -116,7 +118,10 @@ class AddressBook(QtWidgets.QWidget):
         self.cancelButton.show()
 
     def editContact(self):
-        pass
+        self.oldName = self.nameLine.text()
+        self.oldAddress = self.addressText.toPlainText()
+
+        self.updateInterface(self.EditingMode)
 
     def submitContact(self):
         name = self.nameLine.text()
