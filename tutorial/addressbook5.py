@@ -37,7 +37,72 @@ class AddressBook(QtWidgets.QWidget):
     NavigationMode, AddingMode, EditingMode = range(3)
 
     def __init__(self, parent=None):
-        pass
+        super(AddressBook, self).__init__(parent)
+
+        self.contacts = SortedDict()
+        self.oldName = ""
+        self.oldAddress = ""
+        self.currentMode = self.NavigationMode
+
+        nameLabel = QtWidgets.QLabel("Name:")
+        self.nameLine = QtWidgets.QLineEdit()
+        self.nameLine.setReadOnly(True)
+
+        addressLabel = QtWidgets.QLabel("Address:")
+        self.addressText = QtWidgets.QTextEdit()
+        self.addressText.setReadOnly(True)
+
+        self.addButton = QtWidgets.QPushButton("&Add")
+        self.editButton = QtWidgets.QPushButton("&Edit")
+        self.editButton.setEnabled(False)
+        self.removeButton = QtWidgets.QPushButton("&Remove")
+        self.removeButton.setEnabled(False)
+        self.findButton = QtWidgets.QPushButton("&Find")
+        self.findButton.setEnabled(False)
+        self.submitButton = QtWidgets.QPushButton("&Submit")
+        self.submitButton.hide()
+        self.cancelButton = QtWidgets.QPushButton("&Cancel")
+        self.cancelButton.hide()
+
+        self.nextButton = QtWidgets.QPushButton("&Next")
+        self.nextButton.setEnabled(False)
+        self.previousButton = QtWidgets.QPushButton("&Previous")
+        self.previousButton.setEnabled(False)
+
+        self.dialog = FindDialog()
+
+        self.addButton.clicked.connect(self.addContact)
+        self.submitButton.clicked.connect(self.submitContact)
+        self.editButton.clicked.connect(self.editContact)
+        self.removeButton.clicked.connect(self.removeContact)
+        self.findButton.clicked.connect(self.findContact)
+        self.cancelButton.clicked.connect(self.cancel)
+        self.nextButton.clicked.connect(self.next)
+        self.previousButton.clicked.connect(self.previous)
+
+        buttonLayout1 = QtWidgets.QVBoxLayout()
+        buttonLayout1.addWidget(self.addButton)
+        buttonLayout1.addWidget(self.editButton)
+        buttonLayout1.addWidget(self.removeButton)
+        buttonLayout1.addWidget(self.findButton)
+        buttonLayout1.addWidget(self.submitButton)
+        buttonLayout1.addWidget(self.cancelButton)
+        buttonLayout1.addStretch()
+
+        buttonLayout2 = QtWidgets.QHBoxLayout()
+        buttonLayout2.addWidget(self.previousButton)
+        buttonLayout2.addWidget(self.nextButton)
+
+        mainLayout = QtWidgets.QGridLayout()
+        mainLayout.addWidget(nameLabel, 0, 0)
+        mainLayout.addWidget(self.nameLine, 0, 1)
+        mainLayout.addWidget(addressLabel, 1, 0, QtCore.Qt.AlignTop)
+        mainLayout.addWidget(self.addressText, 1, 1)
+        mainLayout.addLayout(buttonLayout1, 1, 2)
+        mainLayout.addLayout(buttonLayout2, 2, 1)
+
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Simple Address Book")
 
     def addContact(self):
         pass
