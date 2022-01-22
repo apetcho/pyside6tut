@@ -6,7 +6,10 @@ from PySide6 import QtWidgets
 class SortedDict(dict):
     class Iterator:
         def __init__(self, soreted_dict):
-            pass
+            self._dict = soreted_dict
+            self._keys = sorted(self._dict.keys())
+            self._nr_items = len(self._keys)
+            self._idx = 0
 
         def __iter__(self):
             pass
