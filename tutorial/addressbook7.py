@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import pickle
+from sre_parse import _OpGroupRefExistsType
 from tkinter import mainloop
 from PySide6 import QtCore
 from PySide6 import QtWidgets
@@ -294,7 +295,21 @@ class AddressBook(QtWidgets.QWidget):
             self.saveButton.setEnabled(number >= 1)
 
     def saveToFile(self):
-        pass
+        fname, _ = QtWidgets.QFileDialog.getSaveFileName(self,
+            "Save Address Book", "",
+            "Address Book (*.abk);;All Files (*)")
+        if not fname:
+            return
+
+        try:
+            oufile = open(str(fname), "wb")
+        except IOError:
+            QtWidgets.QMessageBox.information(self, "Unable to open file",
+                "There was an error opening {fname!r}")
+            return
+
+        pickle.dump(self.contacts, oufile)
+        oufile.close()
 
     def loadFromFile(self):
         pass
