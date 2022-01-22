@@ -172,25 +172,24 @@ class AddressBook(QtWidgets.QWidget):
     def cancel(self):
         self.nameLine.setText(self.oldName)
         self.addressText.setText(self.oldAddress)
-        # TODO
-
-        if not self.contacts:
-            self.nameLine.clear()
-            self.addressText.clear()
-
-        self.nameLine.setReadOnly(True)
-        self.addressText.setReadOnly(True)
-        self.addButton.setEnabled(True)
-
-        number = len(self.contacts)
-        self.nextButton.setEnabled(number > 1)
-        self.previousButton.setEnabled(number > 1)
-
-        self.submitButton.hide()
-        self.cancelButton.hide()
+        self.updateInterface(self.NavigationMode)
 
     def removeContact(self):
-        pass
+        name = self.nameLine.text()
+        address = self.addressText.toPlainText()
+
+        if name in self.contacts:
+            button = QtWidgets.QMessageBox.question(self, "Confirm Remove",
+                f"Are you sure you want to remove {name!r}?",
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No
+            )
+            if button == QtWidgets.QMessageBox.Yes:
+                self.previous()
+                del self.contacts[name]
+                QtWidgets.QMessageBox.information(self, "Remove Successful",
+                    f"{name!r} has been removed from your address book."
+                )
+        self.updateInterface(self.NavigationMode)
 
     def next(self):
         name = self.nameLine.text()
