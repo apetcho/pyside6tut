@@ -27,7 +27,7 @@ class SortedDict(dict):
         __next__ = next
 
     def __iter__(self):
-        pass
+        return SortedDict.Iterator(self)
 
     iterkeys = __iter__
 
