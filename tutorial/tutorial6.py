@@ -26,7 +26,20 @@ class MyWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(MyWidget, self).__init__(parent)
-        # TODO
+
+        quit = QtWidgets.QPushButton("Quit")
+        quit.setFont(QtGui.QFont("Arial", 18, QtGui.QFont.Bold))
+        self.connect(quit, QtCore.SIGNAL("clicked()"),
+            qApp, QtCore.SLOT("quit()"))
+
+        grid = QtWidgets.QGridLayout()
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(quit)
+        layout.addLayout(grid)
+        self.setLayout(layout)
+        for row in range(3):
+            for column in range(3):
+                grid.addWidget(LCDRange(), row, column)
 
 
 app = QtWidgets.QApplication(sys.argv)
