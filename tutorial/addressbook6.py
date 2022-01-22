@@ -355,10 +355,10 @@ class FindDialog(QtWidgets.QDialog):
             QtWidgets.QMessageBox.information(self, "Empty Field",
                 "Please enter a name.")
             return
-        else:
-            self.findText = text
-            self.lineEdit.clear()
-            self.hide()
+        
+        self.findText = text
+        self.lineEdit.clear()
+        self.hide()
 
     def getFindText(self):
         return self.findText
