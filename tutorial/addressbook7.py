@@ -78,3 +78,14 @@ class FindDialog(QtWidgets.QDialog):
 
     def getFindText(self):
         pass
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+
+    addressBook = AddressBook()
+    addressBook.show()
+
+    sys.exit(app.exec())
