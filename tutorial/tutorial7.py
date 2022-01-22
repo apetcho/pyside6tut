@@ -36,16 +36,35 @@ class LCDRange(QtWidgets.QWidget):
     def setValue(self, value):
         self.slider.setValue(value)
 
-    @QtCore.Slot(int)
-    def setValue(self, value):
-        pass
-
 
 class MyWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(MyWidget, self).__init__(parent)
-        # TODO
+
+        quit = QtWidgets.QPushButton("Quit")
+        quit.setFont(QtGui.QFont("Arial", 18, QtGui.QFont.Bold))
+
+        self.connect(quit, QtCore.SIGNAL("clicked()"),
+            self, QtCore.SLOT("quit()"))
+
+        grid = QtWidgets.QGridLayout()
+        previousRange = None
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(quit)
+        layout.addLayout(grid)
+        self.setLayout(layout)
+
+        for row in range(3):
+            for column in range(3):
+                lcdRange = LCDRange()
+                grid.addWidget(lcdRange, row, column)
+
+                if previousRange:
+                    self.connect(lcdRange, QtCore.SIGNAL("valueChanged(int)"),
+                        previousRange.setValue)
+                previousRange = lcdRange
 
 
 widget = MyWidget()
