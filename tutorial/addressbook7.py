@@ -213,7 +213,24 @@ class AddressBook(QtWidgets.QWidget):
         self.addressText.setText(_addr)
 
     def previous(self):
-        pass
+        name = self.nameLine.text()
+        prevname = prevaddr = None
+        for _name, _addr in self.contacts:
+            if _name == name:
+                break
+            prevname = _name
+            prevaddr = _addr
+        else:
+            self.nameLine.clear()
+            self.addressText.clear()
+            return
+
+        if prevname is None:
+            for prevname, prevaddr in self.contacts:
+                pass
+
+        self.nameLine.setText(prevname)
+        self.addressText.setText(prevaddr)
 
     def findContact(self):
         pass
