@@ -219,7 +219,20 @@ class AddressBook(QtWidgets.QWidget):
         self.addressText.setText(prevaddr)
 
     def findContact(self):
-        pass
+        self.dialog.show()
+
+        if self.dialog.exec_() == QtWidgets.QDialog.Accepted:
+            contactName = self.dialog.getFindText()
+
+            if contactName in self.contacts:
+                self.nameLine.setText(contactName)
+                self.addressText.setText(self.contacts[contactName])
+            else:
+                QtWidgets.QMessageBox.information(self, "Contact Not Found",
+                    f"Sorry, {contactName!r} is not in your address book.")
+                return
+
+        self.updateInterface(self.NavigationMode)
 
     def updateInterface(self, mode):
         pass
