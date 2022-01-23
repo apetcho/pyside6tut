@@ -150,7 +150,7 @@ class TetrixBoard(QtWidgets.QFrame):
         self.nxtPiece.setRandomShape()
 
     def shapeAt(self, x, y):
-        pass
+        return self.board[(y * TetrixBoard.BOARD_WIDTH) + x]
 
     def setShapeAt(self, x, y, shape: ShapeEnum):
         pass
