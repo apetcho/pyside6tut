@@ -247,7 +247,9 @@ class GameBoard(QtWidgets.QWidget):
 
         quit = QtWidgets.QPushButton("&Quit")
         quit.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
-        
+        self.connect(quit, QtCore.SIGNAL("clicked()"),
+            root, QtCore.SLOT("quit()"))
+
 
     @QtCore.Slot()
     def fire(self):
