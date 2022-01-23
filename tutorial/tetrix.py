@@ -168,7 +168,8 @@ class TetrixBoard(QtWidgets.QFrame):
         self.nxtPieceLabel = label
 
     def sizeHint(self):
-        pass
+        return QtCore.QSize(TetrixBoard.BOARD_WIDTH * 15 + self.frameWidth()*2,
+            TetrixBoard.BOARD_HEIGHT*15 + self.frameWidth()*2)
 
     def minimumSizeHint(self):
         pass
