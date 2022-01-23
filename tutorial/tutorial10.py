@@ -53,7 +53,11 @@ class CannonField(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(CannonField, self).__init__(parent)
-        # TODO
+
+        self.currentAngle = 45
+        self.currentForce = 0
+        self.setPalette(QtGui.QPalette(QtGui.QColor(250, 250, 200)))
+        self.setAutoFillBackground(True)
 
     def angle(self):
         pass
