@@ -174,7 +174,9 @@ class CannonField(QtWidgets.QWidget):
         painter.restore()
 
     def cannonRect(self):
-        pass
+        result = QtCore.QRect(0, 0, 50, 50)
+        result.moveBottomLeft(self.rect().bottomLect())
+        return result
 
     def shotRect(self):
         pass
