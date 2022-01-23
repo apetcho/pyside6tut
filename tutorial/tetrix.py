@@ -343,7 +343,24 @@ class TetrixBoard(QtWidgets.QFrame):
             self.isStarted = False
 
     def showNextPiece(self):
-        pass
+        if self.nxtPieceLabel is not None:
+            return
+        dx = self.nxtPiece.xmax() - self.nxtPiece.xmin() + 1
+        dy = self.nxtPiece.ymax() - self.nxtPiece.ymin() + 1
+
+        pixmap = QtGui.QPixmap(
+            dx*self.squareWidth(), dy*self.squareHeight())
+        painter = QtGui.QPainter(pixmap)
+        painter.fillRect(
+            pixmap.rect(), self.nxtPieceLabel.palette().background())
+
+        for i in range(4):
+            x = self.nxtPiece.xcoord(i) - self.nxtPiece.xmin()
+            y = self.nxtPiece.ycoord(i) - self.nxtPiece.ymin()
+            self.drawSquare(painter, x*self.squareWidth(),
+                y*self.squareHeight(), self.nxtPiece.shape())
+
+        self.nxtPieceLabel.setPixmap(pixmap)    # FIXME
 
     def tryMove(self, newPiece, newX, newY):
         pass
