@@ -411,7 +411,9 @@ class TetrixPiece:
     )
 
     def __init__(self):
-        pass
+        self.coords = [[0, 0] for _ in range(4)]
+        self.pieceShape = ShapeEnum.NO_SHAPE
+        self.setShape(ShapeEnum.NO_SHAPE)
 
     def shape(self):
         pass
