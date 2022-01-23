@@ -66,7 +66,7 @@ class CannonField(QtWidgets.QWidget):
         self.setAutoFillBackground(True)
 
     def angle(self):
-        pass
+        return self.currentAngle
 
     @QtCore.Slot(int)
     def setAngle(self, angle):
