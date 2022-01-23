@@ -317,7 +317,10 @@ class GameBoard(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def fire(self):
-        pass
+        if self.cannonField.gameOver() or self.cannonField.isShooting():
+            return
+        self.shotsLeft.display(self.shotsLeft.intValue()-1)
+        self.cannonField.shoot()
 
     @QtCore.Slot()
     def hit(self):
