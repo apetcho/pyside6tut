@@ -127,3 +127,26 @@ class CannonField(QtWidgets.QWidget):
 
     def sizeHint(self):
         pass
+
+
+class GameBoard(QtWidgets.QWidget):
+
+    def __init__(self, root, parent=None):
+        pass
+
+    @QtCore.Slot()
+    def fire(self):
+        pass
+
+    @QtCore.Slot()
+    def hit(self):
+        pass
+
+    @QtCore.Slot()
+    def missed(self):
+        pass
+
+    @QtCore.Slot()
+    def newGame(self):
+        pass
+
