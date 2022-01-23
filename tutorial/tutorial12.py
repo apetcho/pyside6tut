@@ -52,7 +52,12 @@ class LCDRange(QtWidgets.QWidget):
         return self.label.text()
 
     def setRange(self, vmin, vmax):
-        pass
+        if vmin < 0 or vmax > 99 or vmin > vmax:
+            QtCore.qWarning(f"LCDRange::setRange({vmin:d}, {vmax:d})\n"
+                "\tRange must be 0..99\n"
+                "\tand minValue must not be greater than maxValue")
+            return
+        self.slider.setRange(vmin, vmax)
 
     def setText(self, text):
         pass
