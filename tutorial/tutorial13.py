@@ -250,6 +250,13 @@ class GameBoard(QtWidgets.QWidget):
         self.connect(quit, QtCore.SIGNAL("clicked()"),
             root, QtCore.SLOT("quit()"))
 
+        angle = LCDRange("ANGLE")
+        angle.setRange(5, 70)
+        force = LCDRange("FORCE")
+        force.setRange(10, 50)
+
+        self.cannonField = CannonField()
+
 
     @QtCore.Slot()
     def fire(self):
