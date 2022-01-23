@@ -18,6 +18,18 @@ class LCDRange(QtWidgets.QWidget):
         self.slider.setRange(0, 99)
         self.slider.setValue(0)
 
+        self.connect(self.slider, QtCore.SIGNAL("valueChanged(int)"),
+            lcd, QtCore.SLOT("display(int)"))
+        self.connect(self.slider, QtCore.SIGNAL("valueChanged(int)"),
+            self, QtCore.SIGNAL("valueChanged(int)"))
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(lcd)
+        layout.addWidget(self.slider)
+        self.setLayout(layout)
+
+        self.setFocusProxy(self.slider)
+
     def value(self):
         pass
 
