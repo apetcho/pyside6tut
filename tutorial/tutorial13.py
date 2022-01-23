@@ -143,7 +143,11 @@ class CannonField(QtWidgets.QWidget):
         self.update()
 
     def restartGame(self):
-        pass
+        if self.isShooting():
+            self.autoShootTimer.stop()
+        self.gameEnded = False
+        self.update()
+        self.emit(QtCore.SIGNAL("canShoot(bool)"), True)
 
     @QtCore.Slot()
     def moveShot(self):
