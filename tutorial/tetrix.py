@@ -460,7 +460,10 @@ class TetrixPiece:
         return vmax
 
     def ymin(self):
-        pass
+        vmin = self.coords[0][1]
+        for i in range(4):
+            vmin = min(vmin, self.coords[i][1])
+        return vmin
 
     def ymax(self):
         pass
