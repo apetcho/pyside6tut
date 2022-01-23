@@ -427,7 +427,13 @@ class TetrixPiece:
         self.pieceShape = shape
 
     def setRandomShape(self):
-        pass
+        SHAPES = [
+            ShapeEnum.L_SHAPE, ShapeEnum.LINE_SHAPE, ShapeEnum.MIRRORED_L_SHAPE,
+            ShapeEnum.S_SHAPE, ShapeEnum.SQUARE_SHAPE, ShapeEnum.T_SHAPE,
+            ShapeEnum.Z_SHAPE
+        ]
+        shape = random.choice(SHAPES)
+        self.setShape(shape)
 
     def xcoord(self, index):
         pass
