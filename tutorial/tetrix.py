@@ -302,7 +302,33 @@ class TetrixBoard(QtWidgets.QFrame):
         self.removeFullLines()
 
     def removeFullLines(self):
-        pass
+        numFullLines = 0
+        for i in range(TetrixBoard.BOARD_HEIGHT -1, -1, -1):
+            lineIsFull = True
+            for j in range(TetrixBoard.BOARD_WIDTH):
+                if self.shapeAt(j, i) == ShapeEnum.NO_SHAPE:
+                    lineIsFull = False
+                    break
+            
+            if lineIsFull:
+                numFullLines += 1
+                for k in range(TetrixBoard.BOARD_HEIGHT-1):
+                    for j in range(TetrixBoard.BOARD_WIDTH):
+                        self.setShapeAt(j, k, self.shapeAt(j, k+1))
+
+                for j in range(TetrixBoard.BOARD_WIDTH):
+                    self.setShapeAt(j, TetrixBoard.BOARD_HEIGHT-1,
+                        ShapeEnum.NO_SHAPE)
+        if numFullLines > 0:
+            self.numLinesRemoved += numFullLines
+            self.score += 10 * numFullLines
+            self.linesRemovedChanged.emit(self.numLinesRemoved)
+            self.scoreChanged.emit(self.score)
+
+            self.timer.start(500, self)
+            self.isWaitingAfterLine = True
+            self.curPiece.setShape(ShapeEnum.NO_SHAPE)
+            self.update()
 
     def newPiece(self):
         pass
