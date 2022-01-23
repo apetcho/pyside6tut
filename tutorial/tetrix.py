@@ -267,7 +267,8 @@ class TetrixBoard(QtWidgets.QFrame):
             super(TetrixBoard, self).timerEvent(event)
 
     def clearBoard(self):
-        pass
+        self.board = [ShapeEnum.NO_SHAPE for i in 
+            range(TetrixBoard.BOARD_HEIGHT*TetrixBoard.BOARD_WIDTH)]
 
     def dropDown(self):
         pass
