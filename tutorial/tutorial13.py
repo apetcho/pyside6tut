@@ -282,8 +282,11 @@ class GameBoard(QtWidgets.QWidget):
 
         self.connect(restart, QtCore.SIGNAL("clicked()"), self.newGame)
 
+        self.hits = QtWidgets.QLCDNumber(2)
+        self.shotsLeft = QtWidgets.QLCDNumber(2)
+        hitsLabel = QtWidgets.QLabel("HITS")
+        shotsLeftLabel = QtWidgets.QLabel("SHOTS LEFT")
         
-
 
     @QtCore.Slot()
     def fire(self):
