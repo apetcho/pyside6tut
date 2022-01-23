@@ -153,7 +153,7 @@ class TetrixBoard(QtWidgets.QFrame):
         return self.board[(y * TetrixBoard.BOARD_WIDTH) + x]
 
     def setShapeAt(self, x, y, shape: ShapeEnum):
-        pass
+        self.board[(y * TetrixBoard.BOARD_WIDTH) + x] = shape
 
     def timeoutTime(self):
         pass
