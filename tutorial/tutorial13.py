@@ -2,6 +2,7 @@
 import sys
 import math
 import random
+from tkinter import Toplevel
 from PySide6 import QtCore, QtGui, QtWidgets
 
 
@@ -286,7 +287,33 @@ class GameBoard(QtWidgets.QWidget):
         self.shotsLeft = QtWidgets.QLCDNumber(2)
         hitsLabel = QtWidgets.QLabel("HITS")
         shotsLeftLabel = QtWidgets.QLabel("SHOTS LEFT")
-        
+
+        topLayout = QtWidgets.QHBoxLayout()
+        topLayout.addWidget(shoot)
+        topLayout.addWidget(self.hits)
+        topLayout.addWidget(hitsLabel)
+        topLayout.addWidget(self.shotsLeft)
+        topLayout.addWidget(shotsLeftLabel)
+        topLayout.addStretch(1)
+        topLayout.addWidget(restart)
+
+        leftLayout = QtWidgets.QVBoxLayout()
+        leftLayout.addWidget(angle)
+        leftLayout.addWidget(force)
+
+        gridLayout = QtWidgets.QGridLayout()
+        gridLayout.addWidget(quit, 0, 0)
+        gridLayout.addLayout(topLayout, 0, 1)
+        gridLayout.addLayout(leftLayout, 1, 0)
+        gridLayout.addWidget(self.cannonField, 1, 1, 2, 1)
+        gridLayout.setColumnStretch(1, 10)
+        self.setLayout(gridLayout)
+
+        angle.setValue(60)
+        force.setValue(25)
+        angle.setFocus()
+
+        self.newGame()
 
     @QtCore.Slot()
     def fire(self):
