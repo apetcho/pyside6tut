@@ -38,7 +38,13 @@ class LCDRange(QtWidgets.QWidget):
         self.slider.setValue(value)
 
     def setRange(self, minVal, maxVal):
-        pass
+        if minVal < 0 or maxVal > 99 or minVal > maxVal:
+            QtCore.qWarning(
+                f"LCDRange.setRange({minVal}, {maxVal})\n"
+                "\tRange must be 0..9\n"
+                "\tand minValue must not be greater than maxValue")
+            return
+        self.slider.setRange(minVal, maxVal)
 
 
 class CannonField(QtWidgets.QWidget):
