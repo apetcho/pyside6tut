@@ -164,8 +164,8 @@ class TetrixBoard(QtWidgets.QFrame):
     def squareHeight(self):
         return self.contentsRect().height() / TetrixBoard.BOARD_HEIGHT
 
-    def setNextPieceLabel(self, lable):
-        pass
+    def setNextPieceLabel(self, label):
+        self.nxtPieceLabel = label
 
     def sizeHint(self):
         pass
