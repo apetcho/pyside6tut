@@ -150,3 +150,8 @@ class GameBoard(QtWidgets.QWidget):
     def newGame(self):
         pass
 
+def main():
+    pass
+
+
+main()
