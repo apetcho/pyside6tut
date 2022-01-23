@@ -100,7 +100,14 @@ class CannonField(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def moveShot(self):
-        pass
+        region = QtGui.QRegion(self.shotRect())
+        self.timerCount += 1
+        shotR = self.shotRect()
+        if shotR.x() > self.width() or shotR.y() > self.height():
+            self.autoShooTimer.stop()
+        else:
+            region = region.united(QtGui.QRegion(shotR))
+        self.update(region)
 
     def paintEvent(self, event: QtCore.QEvent):
         pass
