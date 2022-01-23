@@ -127,6 +127,21 @@ class MyWidget(QtWidgets.QWidget):
         self.connect(cannonField, QtCore.SIGNAL("forceChanged(int)"),
             force.setValue)
 
+        leftLayout = QtWidgets.QVBoxLayout()
+        leftLayout.addWidget(angle)
+        leftLayout.addWidget(force)
+
+        gridLayout = QtWidgets.QGridLayout()
+        gridLayout.addWidget(quit, 0, 0)
+        gridLayout.addLayout(leftLayout, 1, 0)
+        gridLayout.addWidget(cannonField, 1, 1, 2, 1)
+        gridLayout.setColumnStretch(1, 10)
+        self.setLayout(gridLayout)
+
+        angle.setValue(60)
+        force.setValue(25)
+        angle.setFocus()
+
 
 widget = MyWidget()
 widget.setGeometry(100, 100, 500, 355)
