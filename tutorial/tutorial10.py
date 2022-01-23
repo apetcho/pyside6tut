@@ -12,7 +12,11 @@ class LCDRange(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(LCDRange, self).__init__(parent)
-        # TODO
+
+        lcd = QtWidgets.QLCDNumber(2)
+        self.slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.slider.setRange(0, 99)
+        self.slider.setValue(0)
 
     def value(self):
         pass
