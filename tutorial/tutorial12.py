@@ -129,7 +129,18 @@ class CannonField(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def moveShot(self):
-        pass
+        region = QtGui.QRegion(self.shotRect())
+        self.timerCount += 1
+        shotR = self.shotRect()
+        if shotR.intersects(self.targetRect()):
+            self.autoShootTimer.stop()
+            self.emit(QtCore.SIGNAL("hit()"))
+        elif shotR.x() > self.width() or shotR.y() > self.height():
+            self.autoShootTimer.stop()
+            self.emit(QtCore.SIGNAL("missed()"))
+        else:
+            region = region.united(QtGui.QRegion(shotR))
+        self.update(region)
 
     def paintEvent(self, event: QtCore.QEvent):
         pass
