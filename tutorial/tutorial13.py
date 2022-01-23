@@ -268,7 +268,7 @@ class GameBoard(QtWidgets.QWidget):
         self.connect(self.cannonField, QtCore.SIGNAL("forceChanged(int)"),
             force.setValue)
 
-        self.connect(self.cannonField, QtCore.SIGNAL("hit()", self.hit))
+        self.connect(self.cannonField, QtCore.SIGNAL("hit()"), self.hit)
         self.connect(self.cannonField, QtCore.SIGNAL("missed()"), self.missed)
 
         shoot = QtWidgets.QPushButton("&Shoot")
