@@ -109,7 +109,12 @@ class CannonField(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def shoot(self):
-        pass
+        if self.autoShootTimer.isActive():
+            return
+        self.timerCount = 0
+        self.shootAngle = self.currentAngle
+        self.shootForce = self.currentForce
+        self.autoShootTimer.start(5)
 
     firstTime = True
 
