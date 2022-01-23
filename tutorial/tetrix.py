@@ -38,4 +38,21 @@ Credit: Most of the code here is based on official PySide6 example of Tetrix
 code. 
 Note: This code is used for learning Qt6 Programming.
 """
+import random
+from enum import Enum, auto
+
+from PySide6 import QtCore
+from PySide6 import QtGui
+from PySide6 import QtWidgets
+
+
+class ShapeEnum(Enum):
+    NO_SHAPE = auto()
+    Z_SHAPE = auto()
+    S_SHAPE = auto()
+    LINE_SHAPE = auto()
+    T_SHAPE = auto()
+    SQUARE_SHAPE = auto()
+    L_SHAPE = auto()
+    MIRRORED_L_SHAPE = auto()
 
