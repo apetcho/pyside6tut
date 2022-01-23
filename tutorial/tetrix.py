@@ -442,7 +442,7 @@ class TetrixPiece:
         return self.coords[index][1]
 
     def setXCoord(self, index, x):
-        pass
+        self.coords[index][0] = x
 
     def setYCoord(self, index, y):
         pass
