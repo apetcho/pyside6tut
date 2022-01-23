@@ -102,7 +102,10 @@ class CannonField(QtWidgets.QWidget):
 
     @QtCore.Slot(int)
     def setForce(self, force):
-        pass
+        force = 0 if force < 0 else force
+        if self.currentForce == force:
+            return
+        self.emit(QtCore.SIGNAL("forceChanged(int)"), self.currentForce)
 
     @QtCore.Slot()
     def shoot(self):
