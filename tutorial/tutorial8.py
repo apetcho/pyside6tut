@@ -80,8 +80,32 @@ class MyWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(MyWidget, self).__init__(parent)
-        # TODO
 
+        quit = QtWidgets.QPushButton("Quit")
+        quit.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+
+        self.connect(quit, QtCore.SIGNAL("clicked()"),
+            app, QtCore.SLOT("quit()"))
+
+        angle = LCDRange()
+        angle.setRange(5, 70)
+
+        cannonField = CannonField()
+
+        self.connect(angle, QtCore.SIGNAL("valueChanged(int)"),
+            cannonField.setAngle)
+        self.connect(cannonField, QtCore.SIGNAL("angleChanged(int)"),
+            angle.setValue)
+
+        gridLayout = QtWidgets.QGridLayout()
+        gridLayout.addWidget(quit, 0, 0)
+        gridLayout.addWidget(angle, 1, 0)
+        gridLayout.addWidget(cannonField, 1, 1, 2, 1)
+        gridLayout.setColumnStretch(1, 10)
+        self.setLayout(gridLayout)
+
+        angle.setValue(60)
+        angle.setFocus()
 
 
 widget = MyWidget()
