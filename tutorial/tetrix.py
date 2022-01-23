@@ -111,7 +111,9 @@ class TetrixWindow(QtWidgets.QWidget):
         self.resize(550, 370)
 
     def createLabel(self, text):
-        pass
+        label = QtWidgets.QLabel(text)
+        label.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignBottom)
+        return label
 
 
 class TetrixBoard(QtWidgets.QFrame):
