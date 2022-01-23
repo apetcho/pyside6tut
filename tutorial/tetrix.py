@@ -285,8 +285,21 @@ class TetrixBoard(QtWidgets.QFrame):
         if not self.tryMove(self.curPiece, self.curx, self.cury-1):
             self.pieceDropped(0)
 
-    def pieceDropped(self):
-        pass
+    def pieceDropped(self, dropHeight):
+        for i in range(4):
+            x = self.curx + self.curPiece.xcoord(i)
+            y = self.cury - self.curPiece.ycoord(i)
+            self.setShapeAt(x, y, self.curPiece.shape())
+
+        self.numPiecesDropped += 1
+        if self.numPiecesDropped % 25 == 0:
+            self.level += 1
+            self.timer.start(self.timeoutTime(), self)
+            self.levelChanged.emit(self.level)
+
+        self.score += dropHeight + 7
+        self.scoreChanged.emit(self.score)
+        self.removeFullLines()
 
     def removeFullLines(self):
         pass
