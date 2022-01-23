@@ -134,8 +134,13 @@ class CannonField(QtWidgets.QWidget):
             10 + random.randint(0, 255-1))
         self.update()
 
-    def setGameOver(self):
-        pass
+    def setGameOver(self) -> None:
+        if self.gameEnded:
+            return
+        if self.isShooting():
+            self.autoShootTimer.stop()
+        self.gameEnded = True
+        self.update()
 
     def restartGame(self):
         pass
