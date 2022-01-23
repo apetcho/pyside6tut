@@ -15,6 +15,8 @@ class LCDRange(QtWidgets.QWidget):
         super(LCDRange, self).__init__(parent)
         
         lcd = QtWidgets.QLCDNumber(2)
+        lcd.setPalette(QtGui.QColor(10, 20, 10))
+        # lcd.setAutoFillBackground(True)
         self.slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
         self.slider.setRange(0, 99)
         self.slider.setValue(0)
