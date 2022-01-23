@@ -208,7 +208,7 @@ class MyWidget(QtWidgets.QWidget):
 
 
 app = QtWidgets.QApplication(sys.argv)
-widget = MyWidget()
+widget = MyWidget(app)
 widget.setGeometry(100, 100, 500, 355)
 widget.show()
 sys.exit(app.exec())
