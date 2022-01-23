@@ -234,7 +234,7 @@ class CannonField(QtWidgets.QWidget):
         return result
 
     def gameOver(self):
-        pass
+        return self.gameEnded
 
     def isShooting(self):
         pass
