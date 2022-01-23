@@ -278,11 +278,12 @@ class TetrixBoard(QtWidgets.QFrame):
                 break
             newy -= 1
             dropHeight += 1
-            
+
         self.pieceDropped(dropHeight)
 
     def oneLineDown(self):
-        pass
+        if not self.tryMove(self.curPiece, self.curx, self.cury-1):
+            self.pieceDropped(0)
 
     def pieceDropped(self):
         pass
