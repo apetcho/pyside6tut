@@ -237,7 +237,7 @@ class CannonField(QtWidgets.QWidget):
         return self.gameEnded
 
     def isShooting(self):
-        pass
+        return self.autoShootTimer.isActive()
 
 
 class GameBoard(QtWidgets.QWidget):
