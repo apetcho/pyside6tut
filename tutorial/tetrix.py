@@ -147,3 +147,70 @@ class TetrixBoard(QtWidgets.QFrame):
 
     def drawSquare(self, painter, x, y, shape: ShapeEnum):
         pass
+
+
+class TetrixPiece:
+
+    COORDS_TABLES = (
+        ((0,   0), (0,  0), (0,  0), ( 0, 0)),
+        ((0,  -1), (0,  0), (-1, 0), (-1, 1)),
+        ((0,  -1), (0,  0), ( 1, 0), ( 1, 1)),
+        ((0,  -1), (0,  0), ( 0, 1), ( 0, 2)),
+        ((-1,  0), (0,  0), ( 1, 0), ( 0, 1)),
+        (( 0,  0), (1,  0), ( 0, 1), ( 1, 1)),
+        ((-1, -1), (0, -1), ( 0, 0), ( 0, 1)),
+        (( 1, -1), (0, -1), ( 0, 0), ( 0, 1))
+    )
+
+    def __init__(self):
+        pass
+
+    def shape(self):
+        pass
+
+    def setShape(self, shape: ShapeEnum):
+        pass
+
+    def setRandomShape(self):
+        pass
+
+    def xcoord(self, index):
+        pass
+
+    def ycoord(self, index):
+        pass
+
+    def setXCoord(self, index, x):
+        pass
+
+    def setYCoord(self, index, y):
+        pass
+
+    def xmin(self):
+        pass
+
+    def xmax(self):
+        pass
+
+    def ymin(self):
+        pass
+
+    def ymax(self):
+        pass
+
+    def rotatedLeft(self):
+        pass
+
+    def rotatedRight(self):
+        pass
+
+
+if __name__ == "__main__":
+    import sys
+    import time
+
+    app = QtWidgets.QApplication(sys.argv)
+    tetrix = TetrixWindow()
+    tetrix.show()
+    random.seed(time.time())
+    sys.exit(app.exec())
