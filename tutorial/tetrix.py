@@ -419,7 +419,12 @@ class TetrixPiece:
         return self.pieceShape
 
     def setShape(self, shape: ShapeEnum):
-        pass
+        table = TetrixPiece.COORDS_TABLES[shape.value]
+        for i in range(4):
+            for j in range(2):
+                self.coords[i][j] = table[i][j]
+
+        self.pieceShape = shape
 
     def setRandomShape(self):
         pass
