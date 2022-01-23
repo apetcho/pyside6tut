@@ -143,7 +143,12 @@ class CannonField(QtWidgets.QWidget):
         self.update(region)
 
     def paintEvent(self, event: QtCore.QEvent):
-        pass
+        painter = QtGui.QPainter(self)
+        self.paintCannon(painter)
+        if self.autoShootTimer.isActive():
+            self.paintShot(painter)
+
+        self.paintTarget(painter)
 
     def paintShot(self, painter: QtGui.QPainter):
         pass
