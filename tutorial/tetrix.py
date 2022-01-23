@@ -176,7 +176,23 @@ class TetrixBoard(QtWidgets.QFrame):
             TetrixBoard.BOARD_WIDTH * 5 + self.frameWidth()*2)
 
     def start(self):
-        pass
+        if self.isPaused:
+            return
+
+        self.isStarted = True
+        self.isWaitingAfterLine = False
+        self.numLinesRemoved = 0
+        self.numPiecesDropped = 0
+        self.score = 0
+        self.level = 1
+        self.clearBoard()
+
+        self.linesRemovedChanged.emit(self.numLinesRemoved)
+        self.scoreChanged.emit(self.score)
+        self.levelChanged.emit(self.level)
+
+        self.newPiece()
+        self.timer.start(self.timeoutTime(), self)
 
     def pause(self):
         pass
