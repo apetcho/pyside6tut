@@ -416,7 +416,7 @@ class TetrixPiece:
         self.setShape(ShapeEnum.NO_SHAPE)
 
     def shape(self):
-        pass
+        return self.pieceShape
 
     def setShape(self, shape: ShapeEnum):
         pass
