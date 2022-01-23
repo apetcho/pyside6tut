@@ -85,7 +85,7 @@ class CannonField(QtWidgets.QWidget):
         self.newTarget()
 
     def angle(self):
-        pass
+        return self.currentAngle
 
     @QtCore.Slot(int)
     def setAngle(self, angle):
