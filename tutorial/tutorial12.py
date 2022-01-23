@@ -69,7 +69,20 @@ class CannonField(QtWidgets.QWidget):
     forceChanged = QtCore.Signal(int)
 
     def __init__(self, parent=None):
-        pass
+        super(CannonField, self).__init__(parent)
+
+        self.currentAngle = 45
+        self.currentForce = 0
+        self.timerCount = 0
+        self.autoShootTimer = QtCore.QTimer(self)
+        self.connect(self.autoShootTimer, QtCore.SIGNAL("timeout()"),
+            self.moveShot)
+        self.shootAngle = 0
+        self.shootForce = 0
+        self.target = QtCore.QPoint(0, 0)
+        self.setPalette(QtGui.QPalette(QtGui.QColor(250, 250, 200)))
+        self.setAutoFillBackground(True)
+        self.newTarget()
 
     def angle(self):
         pass
