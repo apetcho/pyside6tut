@@ -11,7 +11,14 @@ class LCDRange(QtWidgets.QWidget):
     valueChanged = QtCore.Signal(int)
 
     def __init__(self, text=None, parent=None):
-        pass
+        if isinstance(text, QtWidgets.QWidget):
+            parent = text
+            text = None
+
+        super(LCDRange, self).__init__(parent)
+        self.init()
+        if text:
+            self.setText(text)
 
     def init(self):
         pass
