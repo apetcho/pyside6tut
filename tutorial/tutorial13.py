@@ -344,7 +344,11 @@ class GameBoard(QtWidgets.QWidget):
 
 
 def main():
-    pass
+    root = QtWidgets.QApplication(sys.argv)
+    board = GameBoard(root)
+    board.setGeometry(100, 100, 500, 355)
+    board.show()
+    sys.exit(root.exec())
 
 
 main()
