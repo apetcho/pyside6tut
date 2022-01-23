@@ -49,7 +49,7 @@ class LCDRange(QtWidgets.QWidget):
         self.slider.setValue(value)
 
     def text(self):
-        pass
+        return self.label.text()
 
     def setRange(self, vmin, vmax):
         pass
