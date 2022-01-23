@@ -104,7 +104,28 @@ class MyWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(MyWidget, self).__init__(parent)
-        # TODO
+
+        quit = QtWidgets.QPushButton("&Quit")
+        quit.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+        self.connect(quit, QtCore.SIGNAL("clicked()"),
+            app, QtCore.SLOT("quit()"))
+
+        angle = LCDRange()
+        angle.setRange(5, 70)
+
+        force = LCDRange()
+        force.setRange(10, 50)
+
+        cannonField = CannonField()
+
+        self.connect(angle, QtCore.SIGNAL("valueChanged(int)"),
+            cannonField.setAngle)
+        self.connect(cannonField, QtCore.SIGNAL("angleChanged(int)"),
+            angle.setValue)
+        self.connect(force, QtCore.SIGNAL("valueChanged(int)"),
+            cannonField.setFocus)
+        self.connect(cannonField, QtCore.SIGNAL("forceChanged(int)"),
+            force.setValue)
 
 
 widget = MyWidget()
