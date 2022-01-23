@@ -257,6 +257,33 @@ class GameBoard(QtWidgets.QWidget):
 
         self.cannonField = CannonField()
 
+        self.connect(angle, QtCore.SIGNAL("valueChanged(int)"),
+            self.cannonField.setAngle)
+        self.connect(self.cannonField, QtCore.SIGNAL("angleChanged(int)"),
+            angle.setValue)
+
+        self.connect(force, QtCore.SIGNAL("valueChanged(int)"),
+            self.cannonField.setForce)
+        self.connect(self.cannonField, QtCore.SIGNAL("forceChanged(int)"),
+            force.setValue)
+
+        self.connect(self.cannonField, QtCore.SIGNAL("hit()", self.hit))
+        self.connect(self.cannonField, QtCore.SIGNAL("missed()"), self.missed)
+
+        shoot = QtWidgets.QPushButton("&Shoot")
+        shoot.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+
+        self.connect(shoot, QtCore.SIGNAL("clicked()"), self.fire)
+        self.connect(self.cannonField, QtCore.SIGNAL("canShoot(bool)"),
+            shoot, QtCore.SLOT("setEnabled(bool)"))
+
+        restart = QtWidgets.QPushButton("&New Game")
+        restart.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+
+        self.connect(restart, QtCore.SIGNAL("clicked()"), self.newGame)
+
+        
+
 
     @QtCore.Slot()
     def fire(self):
