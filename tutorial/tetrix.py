@@ -256,7 +256,15 @@ class TetrixBoard(QtWidgets.QFrame):
             super(TetrixBoard, self).keyPressEvent(event)
 
     def timerEvent(self, event):
-        pass
+        if event.timerId() == self.timer.timerId():
+            if self.isWaitingAfterLine:
+                self.isWaitingAfterLine = False
+                self.newPiece()
+                self.timer.start(self.timeoutTime(), self)
+            else:
+                self.oneLineDown()
+        else:
+            super(TetrixBoard, self).timerEvent(event)
 
     def clearBoard(self):
         pass
