@@ -234,7 +234,26 @@ class TetrixBoard(QtWidgets.QFrame):
                     self.curPiece.shape())
 
     def keyPressEvent(self, event):
-        pass
+        if (not self.isStarted or self.isPaused or
+            self.curPiece.shape() == ShapeEnum.NO_SHAPE):
+            super(TetrixBoard, self).keyPressEvent(event)
+            return
+
+        key = event.key()
+        if key == QtCore.Qt.Key_Left:
+            self.tryMove(self.curPiece, self.curx-1, self.cury)
+        elif key == QtCore.Qt.Key_Right:
+            self.tryMove(self.curPiece, self.curx+1, self.cury)
+        elif key == QtCore.Qt.Key_Down:
+            self.tryMove(self.curPiece.rotatedRight(), self.curx, self.cury)
+        elif key == QtCore.Qt.Key_Up:
+            self.tryMove(self.curPiece.rotatedLeft(), self.curx, self.cury)
+        elif key == QtCore.Qt.Key_Space:
+            self.dropDown()
+        elif key == QtCore.Qt.Key_D:
+            self.oneLineDown()
+        else:
+            super(TetrixBoard, self).keyPressEvent(event)
 
     def timerEvent(self, event):
         pass
