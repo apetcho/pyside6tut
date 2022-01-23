@@ -195,7 +195,16 @@ class TetrixBoard(QtWidgets.QFrame):
         self.timer.start(self.timeoutTime(), self)
 
     def pause(self):
-        pass
+        if not self.isStarted:
+            return
+
+        self.isPaused = not self.isPaused
+        if self.isPaused:
+            self.timer.stop()
+        else:
+            self.timer.start(self.timeoutTime(), self)
+
+        self.update()
 
     def paintEvent(self, event):
         pass
