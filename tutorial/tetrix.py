@@ -172,7 +172,8 @@ class TetrixBoard(QtWidgets.QFrame):
             TetrixBoard.BOARD_HEIGHT*15 + self.frameWidth()*2)
 
     def minimumSizeHint(self):
-        pass
+        return QtCore.QSize(TetrixBoard.BOARD_WIDTH*15 + self.frameWidth()*2,
+            TetrixBoard.BOARD_WIDTH * 5 + self.frameWidth()*2)
 
     def start(self):
         pass
