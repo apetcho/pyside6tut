@@ -114,8 +114,14 @@ class CannonField(QtWidgets.QWidget):
         self.emit(QtCore.SIGNAL("forceChanged(int)"), self.currentForce)
 
     @QtCore.Slot()
-    def shoot(self):
-        pass
+    def shoot(self) -> None:
+        if self.isShooting():
+            return
+        self.timerCount = 0
+        self.shootAngle = self.currentAngle
+        self.shootForce = self.currentForce
+        self.autoShootTimer.start(5)
+        self.emit(QtCore.SIGNAL("canShoot(bool)"), False)
 
     firstTime = True
 
