@@ -2,6 +2,7 @@
 import sys
 import math
 import random
+from unittest import result
 from PySide6 import QtCore
 from PySide6 import QtGui
 from PySide6 import QtWidgets
@@ -179,7 +180,19 @@ class CannonField(QtWidgets.QWidget):
         return result
 
     def shotRect(self):
-        pass
+        gravity = 4.0
+        time = self.timerCount/40.0
+        velocity = self.shootForce
+        radians = self.shootAngle * math.pi / 180
+        vx = velocity * math.cos(radians)
+        vy = velocity * math.sin(radians)
+        x0 = (CannonField.barrelRect.right() + 5)*math.cos(radians)
+        y0 = (CannonField.barrelRect.right() + 5)*math.sin(radians)
+        x = x0 + vx*time
+        y = y0 + vy*time - 0.5*gravity*time*time
+        result = QtCore.QRect(0, 0, 6, 6)
+        result.moveCenter(QtCore.QPoint(round(x), self.height()-1-round(y)))
+        return result
 
     def targetRect(self):
         pass
