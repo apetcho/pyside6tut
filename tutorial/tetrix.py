@@ -60,7 +60,7 @@ class ShapeEnum(IntEnum):
 class TetrixWindow(QtWidgets.QWidget):
     """TetrixWindow."""
 
-    def __init__(self):
+    def __init__(self, root):
         super(TetrixWindow, self).__init__()
 
         self.board = TetrixBoard()
@@ -87,7 +87,7 @@ class TetrixWindow(QtWidgets.QWidget):
 
         startBtn.clicked.connect(self.board.start)
         pauseBtn.clicked.connect(self.board.pause)
-        quitBtn.clicked.connect(qApp.quit)
+        quitBtn.clicked.connect(root.quit)
         self.board.scoreChanged.connect(scoreLcd.display)
         self.board.levelChanged.connect(levelLcd.display)
         self.board.linesRemovedChanged.connect(linesLcd.display)
@@ -117,7 +117,7 @@ class TetrixWindow(QtWidgets.QWidget):
 
 
 class TetrixBoard(QtWidgets.QFrame):
-
+    """TetrixBoard."""
     BOARD_WIDTH = 10
     BOARD_HEIGHT = 22
 
@@ -128,7 +128,26 @@ class TetrixBoard(QtWidgets.QFrame):
     def __init__(self, parent=None):
         super(TetrixBoard, self).__init__(parent)
 
-        # TODO
+        self.timer = QtCore.QBasicTimer()
+        self.nxtPieceLabel = None
+        self.isWaitingAfterLine = False
+        self.curPiece = TetrixPiece()
+        self.nxtPiece = TetrixPiece()
+        self.curx = 0
+        self.cury = 0
+        self.numLinesRemoved = 0
+        self.numPiecesDropped = 0
+        self.score = 0
+        self.level = 0
+        self.board = None
+
+        self.setFrameStyle(QtWidgets.QFrame.Panel | QtWidgets.QFrame.Sunken)
+        self.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.isStarted = False
+        self.isPaused = False
+        self.clearBoard()
+
+        self.nxtPiece.setRandomShape()
 
     def shapeAt(self, x, y):
         pass
