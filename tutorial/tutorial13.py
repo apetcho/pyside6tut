@@ -103,7 +103,7 @@ class CannonField(QtWidgets.QWidget):
         self.emit(QtCore.SIGNAL("angleChanged(int)"), self.currentAngle)
 
     def force(self):
-        pass
+        return self.currentForce
 
     @QtCore.Slot(int)
     def setForce(self, force):
