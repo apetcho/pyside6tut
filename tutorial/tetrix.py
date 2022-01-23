@@ -58,11 +58,57 @@ class ShapeEnum(IntEnum):
 
 
 class TetrixWindow(QtWidgets.QWidget):
+    """TetrixWindow."""
 
     def __init__(self):
         super(TetrixWindow, self).__init__()
 
-        # TODO
+        self.board = TetrixBoard()
+
+        nxtPieceLabel = QtWidgets.QLabel()
+        nxtPieceLabel.setFrameStyle(
+            QtWidgets.QFrame.Box | QtWidgets.QFrame.Raised)
+        nxtPieceLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.board.setNextPieceLabel(nxtPieceLabel)
+
+        scoreLcd = QtWidgets.QLCDNumber(5)
+        scoreLcd.setSegmentStyle(QtWidgets.QLCDNumber.Filled)
+        levelLcd = QtWidgets.QLCDNumber(2)
+        levelLcd.setSegmentStyle(QtWidgets.QLCDNumber.Filled)
+        linesLcd = QtWidgets.QLCDNumber(5)
+        linesLcd.setSegmentStyle(QtWidgets.QLCDNumber.Filled)
+
+        startBtn = QtWidgets.QPushButton("&Start")
+        startBtn.setFocusPolicy(QtCore.Qt.NoFocus)
+        quitBtn = QtWidgets.QPushButton("&Quit")
+        quitBtn.setFocusPolicy(QtCore.Qt.NoFocus)
+        pauseBtn = QtWidgets.QPushButton("&Pause")
+        pauseBtn.setFocusPolicy(QtCore.Qt.NoFocus)
+
+        startBtn.clicked.connect(self.board.start)
+        pauseBtn.clicked.connect(self.board.pause)
+        quitBtn.clicked.connect(qApp.quit)
+        self.board.scoreChanged.connect(scoreLcd.display)
+        self.board.levelChanged.connect(levelLcd.display)
+        self.board.linesRemovedChanged.connect(linesLcd.display)
+
+        layout = QtWidgets.QGridLayout()
+        layout.addWidget(self.createLabel("NEXT"), 0, 0)
+        layout.addWidget(nxtPieceLabel, 1, 0)
+        layout.addWidget(self.createLabel("LEVEL"), 2, 0)
+        layout.addWidget(levelLcd, 3, 0)
+        layout.addWidget(startBtn, 4, 0)
+        layout.addWidget(self.board, 0, 1, 6, 1)
+        layout.addWidget(self.createLabel("SCORE"), 0, 2)
+        layout.addWidget(scoreLcd, 1, 2)
+        layout.addWidget(self.createLabel("LINES REMOVED"), 2, 2)
+        layout.addWidget(linesLcd, 3, 2)
+        layout.addWidget(quitBtn, 4, 2)
+        layout.addWidget(pauseBtn, 5, 2)
+        self.setLayout(layout)
+
+        self.setWindowTitle("Tetrix")
+        self.resize(550, 370)
 
     def createLabel(self, text):
         pass
