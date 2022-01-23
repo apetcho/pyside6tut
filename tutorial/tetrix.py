@@ -436,7 +436,7 @@ class TetrixPiece:
         self.setShape(shape)
 
     def xcoord(self, index):
-        pass
+        return self.coords[index][0]
 
     def ycoord(self, index):
         pass
