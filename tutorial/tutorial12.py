@@ -60,7 +60,7 @@ class LCDRange(QtWidgets.QWidget):
         self.slider.setRange(vmin, vmax)
 
     def setText(self, text):
-        pass
+        self.label.setText(text)
 
 
 class CannonField(QtWidgets.QWidget):
