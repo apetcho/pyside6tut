@@ -334,7 +334,7 @@ class TetrixBoard(QtWidgets.QFrame):
         self.curPiece = self.nxtPiece
         self.nxtPiece.setRandomShape()
         self.showNextPiece()
-        self.curx = TetrixBoard.BOARD_WIDTH // 2 + 1
+        self.curx = (TetrixBoard.BOARD_WIDTH // 2) + 1
         self.cury = TetrixBoard.BOARD_HEIGHT - 1 + self.curPiece.ymin()
 
         if not self.tryMove(self.curPiece, self.curx, self.cury):
