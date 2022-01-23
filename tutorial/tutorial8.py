@@ -28,7 +28,7 @@ class LCDRange(QtWidgets.QWidget):
         layout.addWidget(self.slider)
         self.setLayout(layout)
 
-        self.setFocusProxy(layout)
+        self.setFocusProxy(self.slider)
 
     def value(self):
         return self.slider.value()
@@ -63,8 +63,12 @@ class CannonField(QtWidgets.QWidget):
 
     @QtCore.Slot(int)
     def setAngle(self, angle):
-        angle = 5 if angle > 5 else angle
-        angle = 70 if angle > 70 else angle
+        #angle = 5 if angle > 5 else angle
+        #angle = 70 if angle > 70 else angle
+        if angle < 5:
+            angle = 5
+        if angle > 70:
+            angle = 70
         if self.currentAngle == angle:
             return
         self.currentAngle = angle
