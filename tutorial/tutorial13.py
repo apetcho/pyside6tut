@@ -28,6 +28,13 @@ class LCDRange(QtWidgets.QWidget):
         self.label.setSizePolicy(QtWidgets.QSizePolicy.Preferred,
             QtWidgets.QSizePolicy.Fixed)
 
+        self.connect(self.slider, QtCore.SIGNAL("valueChanged(int)"),
+            lcd, QtCore.SLOT("display(int)"))
+        self.connect(self.slider, QtCore.SIGNAL("valueChanged(int)"),
+            self, QtCore.SLOT("valueChanged(int)"))     # XXX
+
+        
+
     def value(self):
         pass
 
