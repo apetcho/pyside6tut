@@ -472,7 +472,15 @@ class TetrixPiece:
         return vmax
 
     def rotatedLeft(self):
-        pass
+        if self.pieceShape == ShapeEnum.SQUARE_SHAPE:
+            return self
+
+        result = TetrixPiece()
+        result.pieceShape = self.pieceShape
+        for i in range(4):
+            result.setXCoord(i, self.ycoord(i))
+            result.setYCoord(i, -self.xcoord(i))
+        return result
 
     def rotatedRight(self):
         pass
