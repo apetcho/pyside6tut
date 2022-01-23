@@ -363,11 +363,39 @@ class TetrixBoard(QtWidgets.QFrame):
         self.nxtPieceLabel.setPixmap(pixmap)    # FIXME
 
     def tryMove(self, newPiece, newX, newY):
-        pass
+        for i in range(4):
+            x = newX + newPiece.xcoord(i)
+            y = newY - newPiece.ycoord(i)
+            if (x < 0 or x >= TetrixBoard.BOARD_WIDTH or y < 0 or
+                y >= TetrixBoard.BOARD_HEIGHT):
+                return False
+            if self.shapeAt(x, y) != ShapeEnum.NO_SHAPE:
+                return False
 
-    def drawSquare(self, painter, x, y, shape: ShapeEnum):
-        pass
+        self.curPiece = newPiece
+        self.curx = newX
+        self.cury = newY
+        self.update()
+        return True
 
+    def drawSquare(self, painter: QtGui.QPainter, x, y, shape: ShapeEnum):
+        COLOR_TABLE = [
+            0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
+            0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00
+        ]
+        color = QtGui.QColor(COLOR_TABLE[shape.value])
+        painter.fillRect(x+1, y+1, self.squareWidth()-2,
+            self.squareHeight()-2, color)
+
+        painter.setPen(color.lighter())
+        painter.drawLine(x, y+self.squareHeight()-1, x, y)
+        painter.drawLine(x, y, x+self.squareWidth()-1, y)
+
+        painter.setPen(color.darker())
+        painter.drawLine(x+1, y+self.squareHeight()-1,
+            x+self.squareWidth()-1, y+self.squareHeight()-1)
+        painter.drawLine(x+self.squareWidth()-1, y+self.squareHeight()-1,
+            x+self.squareWidth()-1, y+1)
 
 class TetrixPiece:
 
