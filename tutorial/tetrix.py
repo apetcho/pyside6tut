@@ -56,3 +56,13 @@ class ShapeEnum(Enum):
     L_SHAPE = auto()
     MIRRORED_L_SHAPE = auto()
 
+
+class TetrixWindow(QtWidgets.QWidget):
+
+    def __init__(self):
+        super(TetrixWindow, self).__init__()
+
+        # TODO
+
+    def createLabel(self, text):
+        pass
