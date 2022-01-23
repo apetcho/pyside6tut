@@ -331,7 +331,16 @@ class TetrixBoard(QtWidgets.QFrame):
             self.update()
 
     def newPiece(self):
-        pass
+        self.curPiece = self.nxtPiece
+        self.nxtPiece.setRandomShape()
+        self.showNextPiece()
+        self.curx = TetrixBoard.BOARD_WIDTH // 2 + 1
+        self.cury = TetrixBoard.BOARD_HEIGHT - 1 + self.curPiece.ymin()
+
+        if not self.tryMove(self.curPiece, self.curx, self.cury):
+            self.curPiece.setShape(ShapeEnum.NO_SHAPE)
+            self.timer.stop()
+            self.isStarted = False
 
     def showNextPiece(self):
         pass
