@@ -91,3 +91,20 @@ class CannonField(QtWidgets.QWidget):
 
     def targetRect(self):
         pass
+
+
+class MyWidget(QtWidgets.QWidget):
+
+    def __init__(self, root, parent=None):
+        pass
+
+
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    widget = MyWidget(app)
+    widget.setGeometry(100, 100, 500, 355)
+    widget.show()
+    sys.exit(app.exec())
+
+
+main()
