@@ -2,7 +2,6 @@
 import sys
 import math
 import random
-from unittest import result
 from PySide6 import QtCore
 from PySide6 import QtGui
 from PySide6 import QtWidgets
@@ -204,7 +203,55 @@ class CannonField(QtWidgets.QWidget):
 class MyWidget(QtWidgets.QWidget):
 
     def __init__(self, root, parent=None):
-        pass
+        super(MyWidget, self).__init__(parent)
+
+        quit = QtWidgets.QPushButton("&Quit")
+        quit.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+        self.connect(quit, QtCore.SIGNAL("clicked()"),
+            root, QtCore.SLOT("quit()"))
+
+        angle = LCDRange("ANGLE")
+        angle.setRange(5, 70)
+
+        force = LCDRange("FORCE")
+        force.setRange(10, 70)
+
+        cannonField = CannonField()
+
+        self.connect(angle, QtCore.SIGNAL("valueChanged(int)"),
+            cannonField.setAngle)
+        self.connect(cannonField, QtCore.SIGNAL("angleChanged(int)"),
+            angle.setValue)
+        self.connect(force, QtCore.SIGNAL("valueChanged(int)"),
+            cannonField.setForce)
+        self.connect(cannonField, QtCore.SIGNAL("forceChanged(int)"),
+            force.setValue)
+
+        shoot = QtWidgets.QPushButton("&Shoot")
+        shoot.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+
+        self.connect(shoot, QtCore.SIGNAL("clicked()"),
+            cannonField.shoot)
+
+        topLayout = QtWidgets.QHBoxLayout()
+        topLayout.addWidget(shoot)
+        topLayout.addStretch(1)
+
+        leftLayout = QtWidgets.QVBoxLayout()
+        leftLayout.addWidget(angle)
+        leftLayout.addWidget(force)
+
+        gridLayout = QtWidgets.QGridLayout()
+        gridLayout.addWidget(quit, 0, 0)
+        gridLayout.addLayout(topLayout, 0, 1)
+        gridLayout.addLayout(leftLayout, 1, 0)
+        gridLayout.addWidget(cannonField, 1, 1, 2, 1)
+        gridLayout.setColumnStretch(1, 10)
+        self.setLayout(gridLayout)
+
+        angle.setValue(60)
+        force.setValue(25)
+        angle.setFocus()
 
 
 def main():
