@@ -207,7 +207,31 @@ class TetrixBoard(QtWidgets.QFrame):
         self.update()
 
     def paintEvent(self, event):
-        pass
+        super(TetrixBoard, self).paintEvent(event)
+
+        painter = QtGui.QPainter(self)
+        rect = self.contentsRect()
+
+        if self.isPaused:
+            painter.drawText(rect, QtCore.Qt.AlignCenter, "Pause")
+            return
+
+        boardTop = rect.bottom() - TetrixBoard.BOARD_HEIGHT*self.squareHeight()
+        for i in range(TetrixBoard.BOARD_HEIGHT):
+            for j in range(TetrixBoard.BOARD_WIDTH):
+                shape = self.shapeAt(j, TetrixBoard.BOARD_HEIGHT-i-1)
+                if shape != ShapeEnum.NO_SHAPE:
+                    self.drawSquare(
+                        painter, rect().left() + j*self.squareWidth(),
+                        boardTop+i*self.squareHeight(), shape)
+
+        if self.curPiece.shape() != ShapeEnum.NO_SHAPE:
+            for i in range(4):
+                x = self.curx + self.curPiece.xcoord(i)
+                y = self.cury - self.curPiece.ycoord(i)
+                self.drawSquare(painter, rect.left() + x *self.squareWidth(),
+                    boardTop+(TetrixBoard.BOARD_HEIGHT-y-1)*self.squareHeight(),
+                    self.curPiece.shape())
 
     def keyPressEvent(self, event):
         pass
