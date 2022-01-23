@@ -40,6 +40,7 @@ Note: This code is used for learning Qt6 Programming.
 """
 import random
 from enum import IntEnum, auto
+from unittest import result
 
 from PySide6 import QtCore
 from PySide6 import QtGui
@@ -483,7 +484,15 @@ class TetrixPiece:
         return result
 
     def rotatedRight(self):
-        pass
+        if self.pieceShape == ShapeEnum.SQUARE_SHAPE:
+            return self
+
+        result = TetrixPiece()
+        result.pieceShape = self.pieceShape
+        for i in range(4):
+            result.setXCoord(i, -self.ycoord(i))
+            result.setYCoord(i, self.xcoord(i))
+        return result
 
 
 if __name__ == "__main__":
