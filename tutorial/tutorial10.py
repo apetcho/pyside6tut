@@ -84,7 +84,15 @@ class CannonField(QtWidgets.QWidget):
         self.emit(QtCore.SIGNAL("forceChanged(int)"), self.currentForce)
 
     def paintEvent(self, event):
-        pass
+        painter = QtGui.QPainter(self)
+
+        painter.setPen(QtCore.Qt.NoPen)
+        painter.setBrush(QtCore.Qt.blue)
+
+        painter.translate(0, self.height())
+        painter.drawPie(QtCore.QRect(-35, -35, 70, 70), 0, 90 * 16)
+        painter.rotate(-self.currentAngle)
+        painter.drawRect(QtCore.QRect(33, -4, 15, 8))
 
     def cannonRect(self):
         pass
