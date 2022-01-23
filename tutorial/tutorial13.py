@@ -126,3 +126,10 @@ class GameBoard(QtWidgets.QWidget):
     @QtCore.Slot()
     def newGame(self):
         pass
+
+
+def main():
+    pass
+
+
+main()
