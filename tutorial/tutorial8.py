@@ -72,7 +72,8 @@ class CannonField(QtWidgets.QWidget):
         self.emit(QtCore.Signal("angleChanged(int)"), self.currentAngle)
 
     def paintEvent(self, event):
-        pass
+        painter = QtGui.QPainter(self)
+        painter.drawText(200, 200, f"Angle = {self.currentAngle}")
 
 
 class MyWidget(QtWidgets.QWidget):
