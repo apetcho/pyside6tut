@@ -19,7 +19,14 @@ class LCDRange(QtWidgets.QWidget):
             self.setText(text)
 
     def init(self):
-        pass
+        lcd = QtWidgets.QLCDNumber(2)
+        self.slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.slider.setRange(0, 99)
+        self.slider.setValue(0)
+        self.label = QtWidgets.QLabel()
+        self.label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label.setSizePolicy(QtWidgets.QSizePolicy.Preferred,
+            QtWidgets.QSizePolicy.Fixed)
 
     def value(self):
         pass
