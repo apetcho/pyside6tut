@@ -12,3 +12,19 @@ from matplotlib.backends.backend_qtagg import (
 )
 from matplotlib.figure import Figure
 
+
+class ApplicationWindow(QMainWindow):
+
+    def __init__(self, root):
+        pass
+
+    def _update_canvas(self):
+        pass
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
