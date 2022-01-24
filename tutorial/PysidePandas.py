@@ -52,7 +52,14 @@ class PandasModel(QAbstractTableModel):
         Return dframe index as vertical header data and columns as horizontal
         header data.
         """
-        pass
+        if role == Qt.DisplayRole:
+            if orientation == Qt.Horizontal:
+                return str(self._dframe.columns[section])
+
+            if orientation == Qt.Vertical:
+                return str(self._dframe.index[section])
+
+        return None
 
 
 def main():
