@@ -373,6 +373,15 @@ class GameBoard(QtWidgets.QWidget):
             self, QtCore.SLOT("close()")
         )
 
+        topLayout = QtWidgets.QHBoxLayout()
+        topLayout.addWidget(shoot)
+        topLayout.addWidget(self.hits)
+        topLayout.addWidget(hitsLabel)
+        topLayout.addWidget(self.shotsLeft)
+        topLayout.addWidget(shotsLeftLabel)
+        topLayout.addStretch(1)
+        topLayout.addWidget(restart)
+
     @QtCore.Slot()
     def fire(self):
         pass
