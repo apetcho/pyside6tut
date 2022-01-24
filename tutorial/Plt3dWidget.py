@@ -112,7 +112,17 @@ class ApplicationWindow(QMainWindow):
             self.table.setItem(i, 2, QTableWidgetItem(f"{Z[i]:.2f}"))
 
     def set_canvas_table_configuration(self, row_count, data):
-        pass
+        self.fig.set_canvas(self.canvas)
+        self._ax = self.canvas.figure.add_subplot(projection="3d")
+
+        self._ax.set_xlabel(self.column_names[0])
+        self._ax.set_ylabel(self.column_names[1])
+        self._ax.set_zlabel(self.column_names[2])
+
+        self.table.setRowCount(row_count)
+        self.table.setColumnCount(3)
+        self.table.setHorizontalHeaderLabels(self.column_names)
+        self.set_table_data(data[0], data[1], data[2])
 
     def plot_wire(self):
         pass
