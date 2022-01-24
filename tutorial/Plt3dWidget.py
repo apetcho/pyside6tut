@@ -197,7 +197,11 @@ class ApplicationWindow(QMainWindow):
 
 
 def main():
-    pass
+    app = QApplication(sys.argv)
+    win = ApplicationWindow()
+    win.setFixedSize(1280, 720)
+    win.show()
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
