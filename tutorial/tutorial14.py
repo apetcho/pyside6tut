@@ -22,7 +22,30 @@ class LCDRange(QtWidgets.QWidget):
             self.setText(text)
 
     def init(self):
-        pass
+        lcd = QtWidgets.QLCDNumber(2)
+        self.slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.slider.setRange(0, 99)
+        self.slider.setValue(0)
+        self.label = QtWidgets.QLabel()
+        self.label.setAlignment(QtCore.Qt.Alignment | QtCore.Qt.AlignTop)
+        self.label.setSizePolicy(
+            QtWidgets.QSizePolicy.Preferred | QtWidgets.QSizePolicy.Fixed)
+
+        self.connect(
+            self.slider, QtCore.SIGNAL("valueChanged(int)"),
+            lcd, QtCore.SLOT("display(int)")
+        )
+        self.connect(
+            self.slider, QtCore.SIGNAL("valueChanged(int)"),
+            self, QtCore.SIGNAL("valueChanged(int)")
+        )
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(lcd)
+        layout.addWidget(self.slider)
+        layout.addWidget(self.label)
+        self.setLayout(layout)
+
+        self.setFocusProxy(self.slider)
 
     def value(self):
         pass
