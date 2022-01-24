@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 import sys
 import numpy as np
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-from mpl_toolkits.mplot3d import axes3d
-from PySide6 import QtCore
+from PySide6.QtCore import Qt, Slot 
 from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import (
     QApplication, QComboBox, QHBoxLayout, QHeaderView, QLabel, QMainWindow,
     QSlider, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget
 )
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+from mpl_toolkits.mplot3d import axes3d
 
 
 class ApplicationWindow(QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, root, parent=None):
         super(ApplicationWindow, self).__init__(parent)
 
         self.column_names = ["Column A", "Column B", "Column C"]
@@ -25,13 +25,13 @@ class ApplicationWindow(QMainWindow):
         # Main menu bar
         self.menu = self.menuBar()
         self.menu_file = self.menu.addMenu("File")
-        exit = QAction("Exit", self, triggered=qApp.quit)
+        exit = QAction("Exit", self, triggered=root.quit)
         self.menu_file.addAction(exit)
 
         self.menu_about = self.menu.addMenu("&About")
         about = QAction("About Qt", self,
             shortcut=QKeySequence(QKeySequence.HelpContents),
-            triggered=qApp.aboutQt)
+            triggered=root.aboutQt)
         self.menu_about.addAction(about)
 
         # Figure (Left)
@@ -40,9 +40,9 @@ class ApplicationWindow(QMainWindow):
 
         # Sliders (Left)
         self.slider_azim = QSlider(minimum=0, maximum=360,
-            orientation=QtCore.Qt.Horizontal)
+            orientation=Qt.Horizontal)
         self.slider_elev = QSlider(minimum=0, maximum=360,
-            orientation=QtCore.Qt.Horizontal)
+            orientation=Qt.Horizontal)
 
         self.slider_azim_layout = QHBoxLayout()
         self.slider_azim_layout.addWidget(
@@ -54,6 +54,7 @@ class ApplicationWindow(QMainWindow):
         self.slider_elev_layout = QHBoxLayout()
         self.slider_elev_layout.addWidget(
             QLabel(f"{self.slider_elev.minimum()}"))
+        self.slider_elev_layout.addWidget(self.slider_elev)
         self.slider_elev_layout.addWidget(
             QLabel(f"{self.slider_elev.maximum()}"))
 
@@ -81,7 +82,7 @@ class ApplicationWindow(QMainWindow):
         llayout.addWidget(QLabel("Azimuth:"), 1)
         llayout.addLayout(self.slider_azim_layout, 5)
         llayout.addWidget(QLabel("Elevation:"), 1)
-        llayout.addLayout(self.slider_azim_layout, 5)
+        llayout.addLayout(self.slider_elev_layout, 5)
 
         # Main layout
         layout = QHBoxLayout(self._main)
@@ -114,6 +115,7 @@ class ApplicationWindow(QMainWindow):
     def set_canvas_table_configuration(self, row_count, data):
         self.fig.set_canvas(self.canvas)
         self._ax = self.canvas.figure.add_subplot(projection="3d")
+        self._ax.cla()
 
         self._ax.set_xlabel(self.column_names[0])
         self._ax.set_ylabel(self.column_names[1])
@@ -129,7 +131,7 @@ class ApplicationWindow(QMainWindow):
         self.set_canvas_table_configuration(len(
             self.X[0]), (self.X[0], self.Y[0], self.Z[0]))
         self._ax.plot_wireframe(self.X, self.Y, self.Z, rstride=10, cstride=10,
-            cmap="virdis")
+            cmap="viridis")
         self.canvas.draw()
 
     def plot_surface(self):
@@ -152,7 +154,6 @@ class ApplicationWindow(QMainWindow):
         self.X = np.append(0, (radii*np.cos(angles)).flatten())
         self.Y = np.append(0, (radii*np.sin(angles)).flatten())
         self.Z = np.sin(-self.X*self.Y)
-
         self.set_canvas_table_configuration(
             len(self.X), (self.X, self.Y, self.Z))
         self._ax.plot_trisurf(
@@ -172,7 +173,7 @@ class ApplicationWindow(QMainWindow):
         self._ax.plot_surface(self.X, self.Y, self.Z)
         self.canvas.draw() 
 
-    @QtCore.Slot()
+    @Slot()
     def combo_option(self, text):
         if text == "Wired":
             self.plot_wire()
@@ -183,13 +184,13 @@ class ApplicationWindow(QMainWindow):
         elif text == "Sphere":
             self.plot_sphere()
 
-    @QtCore.Slot()
+    @Slot()
     def rotate_azim(self, value):
         self._ax.view_init(self._ax.elev, value)
         self.fig.set_canvas(self.canvas)
         self.canvas.draw()
 
-    @QtCore.Slot()
+    @Slot()
     def rotate_elev(self, value):
         self._ax.view_init(value, self._ax.azim)
         self.fig.set_canvas(self.canvas)
@@ -198,7 +199,7 @@ class ApplicationWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    win = ApplicationWindow()
+    win = ApplicationWindow(app)
     win.setFixedSize(1280, 720)
     win.show()
     sys.exit(app.exec())
