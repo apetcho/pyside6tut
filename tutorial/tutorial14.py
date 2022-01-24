@@ -279,7 +279,7 @@ class CannonField(QtWidgets.QWidget):
         return result
 
     def barrierRect(self):
-        pass
+        return QtCore.QRect(145, self.height()-100, 15, 99)
 
     def barrelHit(self, pos):
         pass
