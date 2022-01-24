@@ -56,4 +56,8 @@ class PlotWidget(QWidget):
         self.view.draw()
 
 
-
+def main():
+    app = QApplication(sys.argv)
+    w = PlotWidget()
+    w.show()
+    sys.exit(app.exec())
