@@ -48,7 +48,7 @@ class LCDRange(QtWidgets.QWidget):
         self.setFocusProxy(self.slider)
 
     def value(self):
-        pass
+        return self.slider.value()
 
     @QtCore.Slot(int)
     def setValue(self, value):
