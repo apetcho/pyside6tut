@@ -28,7 +28,9 @@ class PandasModel(QAbstractTableModel):
 
         Return row count of the pandas DataFrame
         """
-        pass
+        if parent == QModelIndex():
+            return len(self._dframe.columns)
+        return 0
 
     def data(self, index: QModelIndex, role=Qt.ItemDataRole):
         """Override metho from QAbstractTableModel.
