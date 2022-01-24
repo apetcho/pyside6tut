@@ -106,7 +106,10 @@ class ApplicationWindow(QMainWindow):
         self.slider_azim.setValue(elev+180)
 
     def set_table_data(self, X, Y, Z):
-        pass
+        for i in range(len(X)):
+            self.table.setItem(i, 0, QTableWidgetItem(f"{X[i]:.2f}"))
+            self.table.setItem(i, 1, QTableWidgetItem(f"{Y[i]:.2f}"))
+            self.table.setItem(i, 2, QTableWidgetItem(f"{Z[i]:.2f}"))
 
     def set_canvas_table_configuration(self, row_count, data):
         pass
