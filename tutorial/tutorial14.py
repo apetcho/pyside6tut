@@ -301,7 +301,15 @@ class CannonField(QtWidgets.QWidget):
 class GameBoard(QtWidgets.QWidget):
 
     def __init__(self, root, parent=None):
-        pass
+        super(GameBoard, self).__init__(parent)
+
+        quit = QtWidgets.QPushButton("&Quit")
+        quit.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+
+        self.connect(
+            quit, QtCore.SIGNAL("clicked()"),
+            root, QtCore.SLOT("quit()")
+        )
 
     @QtCore.Slot()
     def fire(self):
