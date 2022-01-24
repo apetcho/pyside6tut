@@ -48,7 +48,12 @@ class ApplicationWindow(QMainWindow):
 
 
 def main():
-    pass
+    root = QApplication(sys.argv)
+    app = ApplicationWindow(root)
+    app.show()
+    app.activateWindow()
+    app.raise_()
+    sys.exit(root.exec())
 
 
 if __name__ == "__main__":
