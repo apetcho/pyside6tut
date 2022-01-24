@@ -252,7 +252,24 @@ class CannonField(QtWidgets.QWidget):
         return result
 
     def shotRect(self):
-        pass
+        gravity = 9.8   # XXX
+        t = self.timerCount / 40.0
+        velocity = self.shootForce
+        angle = self.shootAngle * math.pi / 180
+
+        vx = velocity * math.cos(angle)
+        vy = velocity * math.sin(angle)
+        x0 = (CannonField.barrelRect.right()+5)*math.cos(angle)
+        y0 = (CannonField.barrelRect.right()+5)*math.sin(angle)
+
+        x = x0 + vx*t
+        y = y0 + vy*t -0.5*gravity*t*t 
+
+        result = QtCore.QRect(0, 0, 6, 6)
+        result.moveCenter(
+            QtCore.QPoint(round(x), self.height()-1-round(y))
+        )
+        return result
 
     def targetRect(self):
         pass
