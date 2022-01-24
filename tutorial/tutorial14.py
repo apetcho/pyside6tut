@@ -390,6 +390,18 @@ class GameBoard(QtWidgets.QWidget):
         cannonLayout.addWidget(self.cannonField)
         cannonBox.setLayout(cannonLayout)
 
+        gridLayout = QtWidgets.QGridLayout()
+        gridLayout.addWidget(quit, 0, 0)
+        gridLayout.addLayout(topLayout, 0, 1)
+        gridLayout.addLayout(leftLayout, 1, 0)
+        gridLayout.addWidget(cannonBox, 1, 1, 2, 1)
+        gridLayout.setColumnStretch(1, 10)
+        self.setLayout(gridLayout)
+
+        angle.setValue(60)
+        frc.setValue(25)
+        angle.setFocus()
+
     @QtCore.Slot()
     def fire(self):
         pass
