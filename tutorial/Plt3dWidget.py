@@ -101,7 +101,9 @@ class ApplicationWindow(QMainWindow):
         self.fig.canvas.mpl_connect("button_release_event", self.on_click)
 
     def on_click(self, event):
-        pass
+        azim, elev = self._ax.azim, self._ax.elev
+        self.slider_azim.setValue(azim+180)
+        self.slider_azim.setValue(elev+180)
 
     def set_table_data(self, X, Y, Z):
         pass
