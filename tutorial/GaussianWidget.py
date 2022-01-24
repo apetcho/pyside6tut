@@ -4,9 +4,10 @@ import numpy as np
 from scipy.stats import norm
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt5agg import FigureCanvasQT as FigureCanvas
+from PySide6 import QtCore
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT
-from PySide6.QtCore import Qt, Slot
+#from PySide6.QtCore import Slot
 from PySide6.QtWidgets import (
     QApplication, QWidget, QDoubleSpinBox, QVBoxLayout, QHBoxLayout
 )
@@ -19,7 +20,7 @@ class PlotWidget(QWidget):
 
         # Create widgets
         self.view = FigureCanvas(Figure(figsize=(5, 3)))
-        self.axes = self.view.figure.suplots()
+        self.axes = self.view.figure.subplots()
         self.toolbar = NavigationToolbar2QT(self.view, self)
         self.mu_input = QDoubleSpinBox()
         self.std_input = QDoubleSpinBox()
@@ -43,7 +44,7 @@ class PlotWidget(QWidget):
 
         self.on_change()
 
-    @Slot()
+    @QtCore.Slot()
     def on_change(self):
         """Update the plot with the current input values."""
         mu = self.mu_input.value()
@@ -61,3 +62,6 @@ def main():
     w = PlotWidget()
     w.show()
     sys.exit(app.exec())
+
+
+main()
