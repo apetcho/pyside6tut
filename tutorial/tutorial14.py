@@ -229,7 +229,9 @@ class CannonField(QtWidgets.QWidget):
         painter.drawRect(self.targetRect())
 
     def paintBarrier(self, painter: QtGui.QPainter):
-        pass
+        painter.setPen(QtCore.Qt.black)
+        painter.setBrush(QtCore.Qt.yellow)
+        painter.drawRect(self.barrierRect())
 
     barrelRect = QtCore.QRect(33, -4, 15, 8)
 
