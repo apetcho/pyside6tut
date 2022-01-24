@@ -386,6 +386,10 @@ class GameBoard(QtWidgets.QWidget):
         leftLayout.addWidget(angle)
         leftLayout.addWidget(frc)
 
+        cannonLayout = QtWidgets.QVBoxLayout()
+        cannonLayout.addWidget(self.cannonField)
+        cannonBox.setLayout(cannonLayout)
+
     @QtCore.Slot()
     def fire(self):
         pass
