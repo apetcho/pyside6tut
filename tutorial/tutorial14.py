@@ -204,7 +204,19 @@ class CannonField(QtWidgets.QWidget):
             self.barrelPressed = False
 
     def paintEvent(self, event: QtCore.QEvent):
-        pass
+        painter = QtGui.QPainter(self)
+
+        if self.gameEnded:
+            painter.setPen(QtCore.Qt.black)
+            painter.setFont(QtGui.QFont("Courier", 48, QtGui.QFont.Bold))
+            painter.drawText(self.rect(), QtCore.Qt.AlignCenter, "Game Over")
+
+        self.paintCannon(painter)
+        self.paintBarrier(painter)
+        if self.isShooting():
+            self.paintShot(painter)
+        if not self.gameEnded:
+            self.painterTarget(painter)
 
     def paintShot(self, painter: QtGui.QPainter):
         pass
