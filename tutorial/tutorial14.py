@@ -189,7 +189,15 @@ class CannonField(QtWidgets.QWidget):
             self.barrelPressed = True
 
     def mouseMoveEvent(self, event: QtCore.QEvent):
-        pass
+        if not self.barrelPressed:
+            return
+        pos = event.position().toPoint()
+        if pos.x() <= 0:
+            pos.setX(1)
+        if pos.y() >= self.height():
+            pos.setY(self.height()-1)
+        rad = math.atan((float(self.rect().bottom()) - pos.y())/pos.x())
+        self.setAngle(round(rad * 180 / math.pi))
 
     def mouseReleaseEvent(self, event: QtCore.QEvent):
         pass
