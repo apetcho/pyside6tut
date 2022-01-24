@@ -27,9 +27,9 @@ class LCDRange(QtWidgets.QWidget):
         self.slider.setRange(0, 99)
         self.slider.setValue(0)
         self.label = QtWidgets.QLabel()
-        self.label.setAlignment(QtCore.Qt.Alignment | QtCore.Qt.AlignTop)
+        self.label.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignTop)
         self.label.setSizePolicy(
-            QtWidgets.QSizePolicy.Preferred | QtWidgets.QSizePolicy.Fixed)
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
 
         self.connect(
             self.slider, QtCore.SIGNAL("valueChanged(int)"),
@@ -340,7 +340,7 @@ class GameBoard(QtWidgets.QWidget):
             self.cannonField, QtCore.SIGNAL("forceChanged(int)"),
             frc.setValue
         )
-        self.connect(self.cannonField, QtCore.SIGNAL("hit()", self.hit))
+        self.connect(self.cannonField, QtCore.SIGNAL("hit()"), self.hit)
         self.connect(self.cannonField, QtCore.SIGNAL("missed()"), self.missed)
 
         shoot = QtWidgets.QPushButton("&Shoot")
