@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-from ctypes import alignment
-from socket import SOL_ALG
 import sys
-from matplotlib.pyplot import fignum_exists
 import numpy as np
 
 from PySide6.QtCore import Qt, Slot
@@ -140,7 +137,7 @@ class ApplicationWindow(QMainWindow):
     def plot_final(self):
         h = rescale_intensity(self.ihc_hed[:, :, 0], out_range=(0, 1))
         d = rescale_intensity(self.ihc_hed[:, :, 2], out_range=(0, 1))
-        zdh = np.dstack(np.zeros_like(h), d, h)
+        zdh = np.dstack((np.zeros_like(h), d, h))
         self._ax2.imshow(zdh)
         self.canvas2.draw()
         self.label2.setText("Stain separated image")
