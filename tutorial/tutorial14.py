@@ -411,7 +411,11 @@ class GameBoard(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def hit(self):
-        pass
+        self.hits.display(self.hits.intValue()+1)
+        if self.shotsLeft.intValue() == 0:
+            self.cannonField.setGameOver()
+        else:
+            self.cannonField.newTarget()
 
     @QtCore.Slot()
     def missed(self):
