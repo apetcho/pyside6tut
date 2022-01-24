@@ -125,7 +125,12 @@ class ApplicationWindow(QMainWindow):
         self.set_table_data(data[0], data[1], data[2])
 
     def plot_wire(self):
-        pass
+        self.X, self.Y, self.Z = axes3d.get_test_data(0.03)
+        self.set_canvas_table_configuration(len(
+            self.X[0]), (self.X[0], self.Y[0], self.Z[0]))
+        self._ax.plot_wireframe(self.X, self.Y, self.Z, rstride=10, cstride=10,
+            cmap="virdis")
+        self.canvas.draw()
 
     def plot_surface(self):
         pass
