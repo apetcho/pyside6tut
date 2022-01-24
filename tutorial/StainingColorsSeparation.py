@@ -108,7 +108,13 @@ class ApplicationWindow(QMainWindow):
 
     @Slot()
     def plot_hematoxylin(self):
-        pass
+        cmap_hema = LinearSegmentedColormap.from_list(
+            "mycmap", ["white", "navy"]
+        )
+        self._ax2.imshow(self.ihc_hed[:, :, 0], cmap=cmap_hema)
+        self.canvas2.draw()
+        self.label2.setText("Hematoxylin")
+        self.set_buttons_state((False, True, True, True))
 
     @Slot()
     def plot_eosin(self):
