@@ -160,7 +160,17 @@ class ApplicationWindow(QMainWindow):
         self.canvas.draw()
 
     def plot_sphere(self):
-        pass
+        # Data
+        u = np.linspace(0, 2*np.pi, 100)
+        v = np.linspace(0, np.pi, 100)
+        self.X = 10 * np.outer(np.cos(u), np.sin(v))
+        self.Y = 10 * np.outer(np.sin(u), np.sin(v))
+        self.Z =  9 * np.outer(np.ones(np.size(u)), np.cos(v))
+
+        self.set_canvas_table_configuration(
+            len(self.X), (self.X[0], self.Y[0], self.Z[0]))
+        self._ax.plot_surface(self.X, self.Y, self.Z)
+        self.canvas.draw() 
 
     @QtCore.Slot()
     def combo_option(self, text):
