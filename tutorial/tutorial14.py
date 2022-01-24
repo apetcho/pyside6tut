@@ -163,7 +163,24 @@ class CannonField(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def moveShot(self):
-        pass
+        region = QtGui.QRegion(self.shotRect())
+        self.timerCount += 1
+
+        shotR = self.shotRect()
+
+        if shotR.intersects(self.targetRect()):
+            self.autoShootTimer.stop()
+            self.emit(QtCore.SIGNAL("hit()"))
+            self.emit(QtCore.SIGNAL("canShoot(bool)"), True)
+        elif (shotR.x() > self.width() or shotR.y() > self.height() or
+             shotR.intersects(self.barrierRect())):
+             self.autoShootTimer.stop()
+             self.emit(QtCore.SIGNAL("missed()"))
+             self.emit(QtCore.SIGNAL("canShoot(bool)"), True)
+        else:
+            region = region.united(QtGui.QRegion(shotR))
+
+        self.update(region)
 
     def mousePressEvent(self, event: QtCore.QEvent):
         pass
