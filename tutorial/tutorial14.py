@@ -323,6 +323,26 @@ class GameBoard(QtWidgets.QWidget):
         )
         self.cannonField = CannonField()
 
+        # --
+        self.connect(
+            angle, QtCore.SIGNAL("valueChanged(int)"),
+            self.cannonField.setAngle
+        )
+        self.connect(
+            self.cannonField, QtCore.SIGNAL("angleChanged(int)"),
+            angle.setValue
+        )
+        self.connect(
+            frc, QtCore.SIGNAL("valueChanged(int)"),
+            self.cannonField.setForce
+        )
+        self.connect(
+            self.cannonField, QtCore.SIGNAL("forceChanged(int)"),
+            frc.setValue
+        )
+        self.connect(self.cannonField, QtCore.SIGNAL("hit()", self.hit))
+        self.connect(self.cannonField, QtCore.SIGNAL("missed()"), self.missed)
+
 
     @QtCore.Slot()
     def fire(self):
