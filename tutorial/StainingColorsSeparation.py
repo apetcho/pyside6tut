@@ -128,7 +128,13 @@ class ApplicationWindow(QMainWindow):
 
     @Slot()
     def plot_dab(self):
-        pass
+        cmap_dab = LinearSegmentedColormap.from_list(
+            "mycmap", ["white", "saddlebrown"]
+        )
+        self._ax2.imshow(self.ihc_hed[:, :, 2], cmap=cmap_dab)
+        self.canvas2.draw()
+        self.label2.setText("DAB")
+        self.set_buttons_state((True, True, False, True))
 
     @Slot()
     def plot_final(self):
