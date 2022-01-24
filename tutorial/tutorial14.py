@@ -282,7 +282,11 @@ class CannonField(QtWidgets.QWidget):
         return QtCore.QRect(145, self.height()-100, 15, 99)
 
     def barrelHit(self, pos):
-        pass
+        matrix = QtGui.QTransform()
+        matrix.translate(0, self.height())
+        matrix.rotate(-self.currentAngle)
+        matrix, invertible = matrix.inverted()
+        return self.barrelRect.contains(matrix.map(pos))
 
     def gameOver(self):
         pass
