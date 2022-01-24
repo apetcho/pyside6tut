@@ -26,7 +26,7 @@ class PandasModel(QAbstractTableModel):
     def columnCount(self, parent=QModelIndex()) -> int:
         """Override method from QAbstractTableModel.
 
-        Return row count of the pandas DataFrame
+        Return column count of the pandas DataFrame
         """
         if parent == QModelIndex():
             return len(self._dframe.columns)
@@ -37,7 +37,11 @@ class PandasModel(QAbstractTableModel):
         
         Retur data cell from the pandas DataFrame
         """
-        pass
+        if not index.isValid():
+            return None
+
+        if role == Qt.DisplayRole:
+            return str(self._dframe.iloc[index.row(), index.column()])
 
     def headerData(
         self, section: int, orientation: Qt.Orientation,
