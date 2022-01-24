@@ -63,7 +63,20 @@ class PandasModel(QAbstractTableModel):
 
 
 def main():
-    pass
+    app = QApplication()
+
+    df = pd.read_csv("iris.csv")
+
+    view = QTableView()
+    view.resize(800, 500)
+    view.horizontalHeader().setStretchLastSection(True)
+    view.setAlternatingRowColors(True)
+    view.setSelectionBehavior(QTableView.SelectRows)
+
+    model = PandasModel()
+    view.setModel(model)
+    view.show()
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
