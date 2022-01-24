@@ -63,9 +63,16 @@ class PandasModel(QAbstractTableModel):
 
 
 def main():
-    app = QApplication()
+    import os.path as path
+    # import os
+    cdir = path.dirname(path.abspath(__file__))
+    datadir = path.split(cdir)[0]
+    fname = path.join(datadir, "iris.csv")
 
-    df = pd.read_csv("iris.csv")
+    app = QApplication()
+    
+
+    df = pd.read_csv(fname)
 
     view = QTableView()
     view.resize(800, 500)
@@ -73,7 +80,7 @@ def main():
     view.setAlternatingRowColors(True)
     view.setSelectionBehavior(QTableView.SelectRows)
 
-    model = PandasModel()
+    model = PandasModel(df)
     view.setModel(model)
     view.show()
     sys.exit(app.exec())
