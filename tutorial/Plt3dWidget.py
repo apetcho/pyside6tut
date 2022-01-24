@@ -174,7 +174,14 @@ class ApplicationWindow(QMainWindow):
 
     @QtCore.Slot()
     def combo_option(self, text):
-        pass
+        if text == "Wired":
+            self.plot_wire()
+        elif text == "Surface":
+            self.plot_surface()
+        elif text == "Triangular Surface":
+            self.plot_triangular_surface()
+        elif text == "Sphere":
+            self.plot_sphere()
 
     @QtCore.Slot()
     def rotate_azim(self, value):
