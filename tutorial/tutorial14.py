@@ -289,7 +289,7 @@ class CannonField(QtWidgets.QWidget):
         return self.barrelRect.contains(matrix.map(pos))
 
     def gameOver(self):
-        pass
+        return self.gameEnded
 
     def isShooting(self):
         pass
