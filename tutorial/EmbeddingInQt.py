@@ -42,7 +42,9 @@ class ApplicationWindow(QMainWindow):
         self._timer.start()
 
     def _update_canvas(self):
-        pass
+        t = np.linspace(0, 10, 101)
+        self._line.set_data(t, np.sin(t + time.time()))
+        self._line.figure.canvas.draw()
 
 
 def main():
