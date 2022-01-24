@@ -133,7 +133,17 @@ class ApplicationWindow(QMainWindow):
         self.canvas.draw()
 
     def plot_surface(self):
-        pass
+        # Data
+        self.X, self.Y = np.meshgrid(
+            np.linspace(-6, 6, 30), np.linspace(-6, 6, 30))
+        self.Z = np.sin(np.sqrt(self.X**2 + self.Y**2))
+        self.set_canvas_table_configuration(
+            len(self.X[0]), (self.X[0], self.Y[0], self.Z[0]))
+        self._ax.plot_surface(
+            self.X, self.Y, self.Z,
+            rstride=1, cstride=1, cmap="viridis", edgecolor="none"
+        )
+        self.canvas.draw()
 
     def plot_triangular_surface(self):
         pass
