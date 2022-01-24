@@ -351,6 +351,10 @@ class GameBoard(QtWidgets.QWidget):
             shoot, QtCore.SLOT("setEnabled(bool)")
         )
 
+        restart = QtWidgets.QPushButton("&New Game")
+        restart.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+        self.connect(restart, QtCore.SIGNAL("clicked()"), self.newGame)
+
 
     @QtCore.Slot()
     def fire(self):
