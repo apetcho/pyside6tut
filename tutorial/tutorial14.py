@@ -316,7 +316,13 @@ class GameBoard(QtWidgets.QWidget):
 
         frc = LCDRange("FORCE")
         frc.setRange(10, 50)
-        
+
+        cannonBox = QtWidgets.QFrame()
+        cannonBox.setFrameStyle(
+            QtWidgets.QFrame.WinPanel | QtWidgets.QFrame.Sunken
+        )
+        self.cannonField = CannonField()
+
 
     @QtCore.Slot()
     def fire(self):
