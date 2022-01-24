@@ -101,7 +101,10 @@ class ApplicationWindow(QMainWindow):
         self.plot_hematoxylin()
 
     def set_buttons_state(self, states):
-        pass
+        self.button1.setEnabled(states[0])
+        self.button2.setEnabled(states[1])
+        self.button3.setEnabled(states[2])
+        self.button4.setEnabled(states[3])
 
     @Slot()
     def plot_hematoxylin(self):
