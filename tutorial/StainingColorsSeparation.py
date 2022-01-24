@@ -118,7 +118,13 @@ class ApplicationWindow(QMainWindow):
 
     @Slot()
     def plot_eosin(self):
-        pass
+        cmap_eosin = LinearSegmentedColormap.from_list(
+            "mycmap", ["darkviolet", "white"]
+        )
+        self._ax2.imshow(self.ihc_hed[:, :, 1], cmap=cmap_eosin)
+        self.canvas2.draw()
+        self.label2.setText("Eosin")
+        self.set_buttons_state((True, False, True, True))
 
     @Slot()
     def plot_dab(self):
