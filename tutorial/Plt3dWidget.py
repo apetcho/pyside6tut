@@ -185,7 +185,9 @@ class ApplicationWindow(QMainWindow):
 
     @QtCore.Slot()
     def rotate_azim(self, value):
-        pass
+        self._ax.view_init(self._ax.elev, value)
+        self.fig.set_canvas(self.canvas)
+        self.canvas.draw()
 
     @QtCore.Slot()
     def rotate_elev(self, value):
