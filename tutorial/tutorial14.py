@@ -295,7 +295,7 @@ class CannonField(QtWidgets.QWidget):
         return self.autoShootTimer.isActive()
 
     def sizeHint(self):
-        pass
+        return QtCore.QSize(400, 300)
 
 
 class GameBoard(QtWidgets.QWidget):
