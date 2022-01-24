@@ -200,7 +200,8 @@ class CannonField(QtWidgets.QWidget):
         self.setAngle(round(rad * 180 / math.pi))
 
     def mouseReleaseEvent(self, event: QtCore.QEvent):
-        pass
+        if event.button() == QtCore.Qt.LeftButton:
+            self.barrelPressed = False
 
     def paintEvent(self, event: QtCore.QEvent):
         pass
