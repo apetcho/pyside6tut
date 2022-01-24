@@ -236,7 +236,15 @@ class CannonField(QtWidgets.QWidget):
     barrelRect = QtCore.QRect(33, -4, 15, 8)
 
     def paintCannon(self, painter: QtGui.QPainter):
-        pass
+        painter.setPen(QtCore.Qt.NoPen)
+        painter.setBrush(QtCore.Qt.blue)
+
+        painter.save()
+        painter.translate(0, self.height())
+        painter.drawPie(QtCore.QRect(-35, -35, 70, 70), 0, 90*16)
+        painter.rotate(-self.currentAngle)
+        painter.drawRect(CannonField.barrelRect)
+        painter.restore()
 
     def cannonRect(self):
         pass
