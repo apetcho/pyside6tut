@@ -424,7 +424,10 @@ class GameBoard(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def newGame(self):
-        pass
+        self.shotsLeft.display(15)
+        self.hits.display(0)
+        self.cannonField.restartGame()
+        self.cannonField.newTarget()
 
 def main():
     pass
