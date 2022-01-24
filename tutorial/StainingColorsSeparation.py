@@ -138,7 +138,13 @@ class ApplicationWindow(QMainWindow):
 
     @Slot()
     def plot_final(self):
-        pass
+        h = rescale_intensity(self.ihc_hed[:, :, 0], out_range=(0, 1))
+        d = rescale_intensity(self.ihc_hed[:, :, 2], out_range=(0, 1))
+        zdh = np.dstack(np.zeros_like(h), d, h)
+        self._ax2.imshow(zdh)
+        self.canvas2.draw()
+        self.label2.setText("Stain separated image")
+        self.set_buttons_state((True, True, True, False))
 
 
 def main():
