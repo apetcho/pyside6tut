@@ -343,6 +343,14 @@ class GameBoard(QtWidgets.QWidget):
         self.connect(self.cannonField, QtCore.SIGNAL("hit()", self.hit))
         self.connect(self.cannonField, QtCore.SIGNAL("missed()"), self.missed)
 
+        shoot = QtWidgets.QPushButton("&Shoot")
+        shoot.setFont(QtGui.QFont("Times", 18, QtGui.QFont.Bold))
+        self.connect(shoot, QtCore.SIGNAL("clicked()"), self.fire)
+        self.connect(
+            self.cannonField, QtCore.SIGNAL("canShoot(bool)"),
+            shoot, QtCore.SLOT("setEnabled(bool)")
+        )
+
 
     @QtCore.Slot()
     def fire(self):
