@@ -382,6 +382,10 @@ class GameBoard(QtWidgets.QWidget):
         topLayout.addStretch(1)
         topLayout.addWidget(restart)
 
+        leftLayout = QtWidgets.QVBoxLayout()
+        leftLayout.addWidget(angle)
+        leftLayout.addWidget(frc)
+
     @QtCore.Slot()
     def fire(self):
         pass
