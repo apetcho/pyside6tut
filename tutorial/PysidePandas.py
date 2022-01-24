@@ -11,8 +11,8 @@ class PandasModel(QAbstractTableModel):
     """A model to interface a Qt view with pandas dataframe."""
 
     def __init__(self, dframe: pd.DataFrame, parent=None):
-        # super(PandasModel, self).__init__(parent)
-        pass
+        super(PandasModel, self).__init__(parent)
+        self._dframe = dframe
 
     def rowCount(self, parent=QModelIndex()) -> int:
         """Override method from QAbstractTableModel.
