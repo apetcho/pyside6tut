@@ -183,7 +183,10 @@ class CannonField(QtWidgets.QWidget):
         self.update(region)
 
     def mousePressEvent(self, event: QtCore.QEvent):
-        pass
+        if event.button() != QtCore.Qt.LeftButton:
+            return
+        if self.barrelHit(event.position().toPoint()):
+            self.barrelPressed = True
 
     def mouseMoveEvent(self, event: QtCore.QEvent):
         pass
