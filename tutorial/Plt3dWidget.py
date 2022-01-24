@@ -146,7 +146,18 @@ class ApplicationWindow(QMainWindow):
         self.canvas.draw()
 
     def plot_triangular_surface(self):
-        pass
+        # Data
+        radii = np.linspace(0.125, 1.0, 8)
+        angles = np.linspace(0, 2*np.pi, 36, endpoint=False)[..., np.newaxis]
+        self.X = np.append(0, (radii*np.cos(angles)).flatten())
+        self.Y = np.append(0, (radii*np.sin(angles)).flatten())
+        self.Z = np.sin(-self.X*self.Y)
+
+        self.set_canvas_table_configuration(
+            len(self.X), (self.X, self.Y, self.Z))
+        self._ax.plot_trisurf(
+            self.X, self.Y, self.Z, linewidth=0.2, antialiased=True)
+        self.canvas.draw()
 
     def plot_sphere(self):
         pass
